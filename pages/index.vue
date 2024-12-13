@@ -44,17 +44,16 @@
 </template>
 
 <script setup>
-/*
 import { useCookieStore } from "~/stores";
 
 const store = useCookieStore();
 
 onMounted(() => {
-  store.setProyId(undefined); 
+  store.setProyId(undefined);
   store.setUserId(undefined);
   store.setTareaId(undefined);
 });
-*/
+
 const login = () => {
   navigateTo("/iniciar-sesion");
 };
