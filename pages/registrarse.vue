@@ -98,7 +98,7 @@ const passwordsMatch = computed(() => {
 const register = async () => {
   try {
     if (passwordsMatch.value) {
-      const result = await useFetch("http://localhost:3001/user/create", {
+      const data = await $fetch("http://localhost:3001/user/singup", {
         method: "post",
         body: {
           email: formData.value.email,
@@ -108,14 +108,11 @@ const register = async () => {
           password: formData.value.password,
         },
       });
-      console.log("Register with:", formData.value);
       navigateTo("/iniciar-sesion");
-    } else {
-      alert("Ha habido un error al crear la cuenta.");
     }
   } catch (error) {
     console.error(error);
-    alert("Error al iniciar sesión.");
+    alert("Something went wrong!");
   }
 };
 
