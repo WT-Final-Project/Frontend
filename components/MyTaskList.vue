@@ -1,12 +1,12 @@
 <template>
   <div class="task-list">
-    <h2 class="title">Mis tareas:</h2>
+    <h2 class="title">My tasks:</h2>
     <ul>
       <li v-for="task in tasks" :key="task.id" class="task">
         <div class="task-details" @click="() => goToTaskDetails(task.idtarea)">
           <div class="container">
             <strong class="form-group">{{ task.titulo }}</strong>
-            <p class="form-group">Fecha Vencimiento: {{ task.fechavencimineto }}</p>
+            <p class="form-group">Due date: {{ task.fechavencimineto }}</p>
           </div>
         </div>
       </li>

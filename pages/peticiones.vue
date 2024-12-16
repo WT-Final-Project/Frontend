@@ -1,7 +1,7 @@
 <template>
     <CabeceraPr />
     <div class="container">
-        <p class="header">FUTURA IMPLEMENTACIÓN</p>
+        <p class="header">to be done</p>
     </div>
 </template>
   

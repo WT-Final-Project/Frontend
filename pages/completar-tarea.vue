@@ -7,32 +7,32 @@
         <h1 class="title">{{ task.titulo }}</h1>
         <div class="container2">
           <div class="form-group">
-            <label class="negrita">Descripción:</label>
+            <label class="negrita">Description:</label>
             <p>{{ task.descripcion }}</p>
           </div>
 
           <div class="form-group">
-            <label class="negrita">Fecha vencimiento:</label>
+            <label class="negrita">Due date:</label>
             <p>{{ task.fechavencimineto }}</p>
           </div>
 
           <div class="form-group" v-if="user.rango === 'lider'">
-            <label class="negrita">Estado:</label>
+            <label class="negrita">State:</label>
             <p>{{ task.completada === 1 ? 'Completada' : 'Pendiente' }}</p>
           </div>
         </div>
 
         <div class="form-group" v-if="user.rango === 'lider' && task.completada === 1">
-          <label class="negrita">Archivos adjuntos:</label>
+          <label class="negrita">Archives:</label>
           <p>{{ fichero.nombre }}</p>
         </div> 
 
         <div class="form-group" v-if="userId === task.nombreusuario && task.completada === 0">
-          <label for="file" class="negrita">Archivos adjuntos:</label>
+          <label for="file" class="negrita">Archives:</label>
           <input type="file" id="file" @change="handleFileUpload">
         </div>
 
-        <button @click="submitTask" class="submit-button" v-if="userId === task.nombreusuario && task.completada === 0">Completar tarea</button>
+        <button @click="submitTask" class="submit-button" v-if="userId === task.nombreusuario && task.completada === 0">Complete task</button>
       </div>
     </div>
 </template>
@@ -94,7 +94,7 @@ const submitTask = async () => {
           {
             navigateTo('/proyecto');
           } else {
-            alert("¡Ha ocurrido un error!");
+            alert("¡An error has occur!");
           }
 
           console.log(subir);
@@ -104,16 +104,16 @@ const submitTask = async () => {
         navigateTo('/proyecto');
         }
       } else {
-        alert("¡Ha ocurrido un error!");
+        alert("¡An error has occur!");
       }
 
     } catch (error) {
       console.error(error);
-      alert("¡Ha ocurrido un error!");
+      alert("¡An error has occur!");
     }
 
   } else {
-    alert('La tarea no está asignada a este usuario.');
+    alert('The task is not assigned to this user');
   }
 }
 

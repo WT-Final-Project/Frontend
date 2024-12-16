@@ -3,21 +3,21 @@
   <div class="container">
     <BackButton :to="'/proyecto'"/>
     <form @submit.prevent="modifyProject">
-      <h2 class="title">MODIFICAR PROYECTO</h2>
+      <h2 class="title">MODIFY PROJECT</h2>
       <div class="form-group">
-        <label for="nombre">Nombre</label>
+        <label for="nombre">Name</label>
         <input type="text" id="nombre" v-model="formData.name" required />
       </div>
       <div class="form-group">
-        <label for="descripcion">Descripción</label>
+        <label for="descripcion">Description</label>
         <input type="text" id="descripcion" v-model="formData.description" required />
       </div>
       <div class="form-group">
-        <p>El codigo de invitacion del proyecto es: {{ proyId }}</p>
+        <p>The invitation code for the project is: {{ proyId }}</p>
       </div>
       <div class="buttons-wrapper">
-        <MainButton class="btn-black" type="submit">Confirmar</MainButton>
-        <MainButton class="btn-red" @click="eliminar">Eliminar proyecto</MainButton>
+        <MainButton class="btn-black" type="submit">Confirm</MainButton>
+        <MainButton class="btn-red" @click="eliminar">Delete Project</MainButton>
       </div>
     </form>
   </div>
@@ -57,12 +57,12 @@ const modifyProject = async () => {
       if(result.data._value != null) {
         navigateTo('/proyecto');
       } else {
-        alert('¡Ha ocurrido un error!');
+        alert('¡An error has occur!');
       }
 
   } catch (error) {
     console.error(error);
-    alert("Error al modificar proyecto.");
+    alert("Error modifying the project.");
   }
 };
 
@@ -76,11 +76,11 @@ const eliminar = async () => {
         store.setProyId(undefined);
         navigateTo('/pantalla-inicio');
       } else {
-        alert('¡Ha ocurrido un error!');
+        alert('¡An error has occur!');
       }
   } catch (error) {
     console.error(error);
-    alert("Error al eliminar proyecto.");
+    alert("Error eliminating project.");
   }
 };
 

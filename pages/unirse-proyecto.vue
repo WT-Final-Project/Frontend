@@ -3,9 +3,9 @@
       <Cabecera />
       <form @submit.prevent="joinProject">
         <div class="container">
-          <h2 class="title">UNIRSE A UN PROYECTO</h2>
+          <h2 class="title">JOIN THE PROJECT</h2>
           <div class="form-row">
-            <label for="accessCode">Introduce el código de acceso aquí:</label>
+            <label for="accessCode">Enter the access code here:</label>
           </div>
           <input 
             id="accessCode" 
@@ -14,7 +14,7 @@
             required 
             placeholder="Código de acceso" 
           />
-          <button type="submit">Unirme</button>
+          <button type="submit">Join</button>
         </div>
       </form>
     </div>
@@ -56,11 +56,11 @@
         store.setProyId(dataForm.value.accessCode);
         navigateTo('/proyecto');
       } else {
-        alert("Error al unirse al proyecto, proyecto inexistente o ya formas parte de el.");
+        alert("Error joining the project. The project either does not exist or you are already a member.");
       }
     } catch (error) {
       console.error(error);
-      alert("Error al unirse al proyecto");
+      alert("Error joining the project");
     }
   };
   </script>

@@ -11,15 +11,15 @@
         <p class=" desc">{{project.descripcion}}</p>
         <div v-if="userRango === 'lider'">
           <NuxtLink to="/crear-tarea">
-            <MainButton class="custom-button">AÑADIR TAREA</MainButton>
+            <MainButton class="custom-button">ADD TASK</MainButton>
           </NuxtLink>
         </div>
         
         <div v-if="userRango === 'lider'">
-        <h2>Tareas del proyecto:</h2>
+        <h2>Project task:</h2>
         </div>
         <div v-if="userRango === 'participante'">
-        <h2>Tareas pendientes del proyecto:</h2>
+        <h2>Pending project tasks:</h2>
         </div>
 
         <TaskList :tasks="tasksAll" v-if="userRango === 'lider'"/>

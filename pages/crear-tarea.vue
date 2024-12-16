@@ -7,32 +7,32 @@
           </div>
 
           <div class="create-task-header">
-            <label for="taskName">CREAR TAREA</label>
+            <label for="taskName">CREATE TASK</label>
           </div>
 
           <div class="form-group">
-            <label for="taskName">Nombre Tarea</label>
+            <label for="taskName">Task name</label>
             <input type="text" id="taskName" v-model="dataForm.nombre" required>
           </div>
     
           <div class="form-group">
-            <label for="descripcion">Descripción</label>
+            <label for="descripcion">Description</label>
             <input type="descripcion" id="taskName" v-model="dataForm.descripcion" required>
           </div>
 
           <div class="form-group">
-            <label for="fechavencimineto">Fecha de vencimiento</label>
+            <label for="fechavencimineto">Due date</label>
             <input type="date" id="fechavencimineto" v-model="dataForm.fechavencimineto" required>
           </div>
     
           <div class="form-group">
-            <label for="nombreusuario">Asignar a</label>
+            <label for="nombreusuario">Assign to</label>
               <select id="nombreusuario" v-model="dataForm.nombreUsuario" required >
               <option v-for="user in users" :value="user.nombreusuario">{{ user.nombre }}</option>
             </select> 
           </div>
     
-          <MainButton class="custom-button" type="submit">Crear tarea</MainButton>
+          <MainButton class="custom-button" type="submit">Create task</MainButton>
         </div>
       </form>
     </div>
@@ -77,12 +77,12 @@
       if(result.data._value != null) {
         navigateTo('/proyecto');
       } else {
-        alert("¡Ha ocurrido un error!");
+        alert("¡An error has occur!");
       }
 
     } catch(error) {
       console.error(error);
-      alert("¡Ha ocurrido un error!");
+      alert("¡An error has occur!");
     }
   }
 

@@ -1,7 +1,7 @@
 <template>
   <CabeceraPr />
   <div class="container">
-    <h2 class="title">PARTICIPANTES</h2>
+    <h2 class="title">PARTICIPANTS</h2>
       
     <ParticipantList :participants="participants"/>
   </div>

@@ -2,10 +2,10 @@
   <header class="main-header">
     <nav>
       <ul>
-        <li><NuxtLink to="/pantalla-inicio">MIS PROYECTOS</NuxtLink></li>
-        <li><NuxtLink to="/crear-proyecto">CREAR UN PROYECTO</NuxtLink></li>
-        <li><NuxtLink to="/unirse-proyecto">UNIRSE A UN PROYECTO</NuxtLink></li>
-        <li><NuxtLink to="/configurar-cuenta">CONFIGURAR CUENTA</NuxtLink></li>
+        <li><NuxtLink to="/pantalla-inicio">MY PROJECTS</NuxtLink></li>
+        <li><NuxtLink to="/crear-proyecto">CREATE A PROJECT</NuxtLink></li>
+        <li><NuxtLink to="/unirse-proyecto">JOIN A PROJECT</NuxtLink></li>
+        <li><NuxtLink to="/configurar-cuenta">CONFIGURE AN ACCOUNT</NuxtLink></li>
       </ul>
     </nav>
   </header>

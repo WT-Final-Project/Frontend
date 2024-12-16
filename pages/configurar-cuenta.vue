@@ -4,41 +4,41 @@
     <div class="config-container">
       <div class="container">
         <form @submit.prevent="submitForm">
-          <h2 class="title">CONFIGURAR CUENTA</h2>
+          <h2 class="title">CONFIGUERE ACCOUNT</h2>
           <div class="form-row">
             <div class="input-group">
-              <label for="user">Nombre de Usuario: {{ userId }}</label>
+              <label for="user">User name: {{ userId }}</label>
             </div>
             <div>
-              <label for="email">Correo: </label>
+              <label for="email">Email: </label>
               <input type="email" id="email" v-model="formData.email" placeholder="Correo" required />
             </div>
           </div>
           <div class="form-row">
             <div class="input-group">
-              <label for="user">Nombre: </label>
+              <label for="user">Name: </label>
               <input type="text" id=user v-model="formData.name" placeholder="Nombre Usuario" required />
             </div>
             <div>
-              <label for="email">Apellido: </label>
+              <label for="email">Surname: </label>
               <input type="email" id="email" v-model="formData.lastName" placeholder="Correo" required />
             </div>
           </div>
           <div class="form-row">
             <div class="input-group">
-              <label for="password">Constraseña: </label>
+              <label for="password">Password: </label>
               <input type="password" id="password" v-model="formData.newPassword" placeholder="Nueva contraseña" required />
             </div>
             <div>
-              <label for="confirmPassword">Repetir contraseña: </label>
+              <label for="confirmPassword">Repeat Password: </label>
               <input type="password" if="confirmPassword" v-model="formData.confirmPassword" placeholder="Repetir contraseña" required />
-              <span v-if="!passwordsMatch && formData.confirmPassword" class="error">Las contraseñas no coinciden</span>
+              <span v-if="!passwordsMatch && formData.confirmPassword" class="error">Passwords dont match</span>
             </div>
           </div>
         </form>
         <div class="button-container">
-          <button class="logout-button" @click="logout">Cerrar sesión</button>
-          <button class="submit-button" @click="submitForm" :disabled="!passwordsMatch">Guardar cambios</button>
+          <button class="logout-button" @click="logout">Close session</button>
+          <button class="submit-button" @click="submitForm" :disabled="!passwordsMatch">Save changes</button>
         </div>
       </div>
     </div>
@@ -90,11 +90,11 @@
         if(result.data._value != null){
           navigateTo("/pantalla-inicio");
         } else {
-          alert("¡Ha ocurrido un erro!");
+          alert("¡An error has occur!");
         }
       } catch (error){
         console.error(error);
-        alert("Error al modificar cuenta.");
+        alert("Error modifying the account");
       }
       
     }

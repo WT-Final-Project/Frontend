@@ -1,7 +1,7 @@
 <template>
   <div class="login-container">
     <BackButton to="/" />
-    <h2 class="login-title">INICIAR SESION</h2>
+    <h2 class="login-title">Sing in</h2>
     <form @submit.prevent="login">
       <div class="form-group">
         <label for="email">Email</label>
@@ -13,10 +13,10 @@
       </div>
       <div class="buttons-wrapper">
         <main-button class="btn-white" @click="createAccount"
-          >CREAR CUENTA</main-button
+          >CREATE ACCOUNT</main-button
         >
         <main-button class="btn-black" type="submit"
-          >INICIAR SESIÓN</main-button
+          >SIGN IN</main-button
         >
       </div>
     </form>

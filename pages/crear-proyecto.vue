@@ -4,14 +4,14 @@
 
     <form @submit.prevent="createProject">
       <div class="container">
-        <h1 class="title">CREAR PROYECTO</h1>
+        <h1 class="title">CREATE PROJECT</h1>
         <div class="form-row">
-          <label for="name">Nombre</label>
+          <label for="name">Name</label>
           <input type="text" id="name" v-model="formData.name" required />
         </div>
 
         <div class="form-row">
-          <label for="description">Descripción</label>
+          <label for="description">Description</label>
           <textarea
             id="description"
             v-model="formData.description"
@@ -20,7 +20,7 @@
         </div>
 
         <div class="MainButton">
-          <MainButton class="custom-button" type="submit">Crear proyecto</MainButton>
+          <MainButton class="custom-button" type="submit">Create project</MainButton>
         </div>
       </div>
     </form>
@@ -65,7 +65,7 @@ const createProject = async () => {
 
   } catch(error) {
     console.error(error);
-    alert("Error al crear ");
+    alert("Error creating");
   }
   console.log("Project data:", formData.value);
 };

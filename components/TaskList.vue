@@ -5,8 +5,8 @@
             <div class="container">
               <div @click="() => goToTaskDetails(task.idtarea)">
                 <strong>{{ task.titulo }}</strong>
-                <p>Asignado a: {{ task.nombreusuario }}</p>
-                <p>Fecha Vencimiento: {{ task.fechavencimineto }}</p>
+                <p>Assigned to: {{ task.nombreusuario }}</p>
+                <p>Due date: {{ task.fechavencimineto }}</p>
               </div>
             </div>
           </li>

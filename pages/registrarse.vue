@@ -2,7 +2,7 @@
   <div class="container">
     <BackButton to="/" />
     <form @submit.prevent="register" class="registration-form">
-      <h2>CREAR CUENTA</h2>
+      <h2>CREATE ACCOUNT</h2>
       <div class="form-row">
         <div class="input-group">
           <input
@@ -56,15 +56,15 @@
             required
           />
           <span v-if="!passwordsMatch && formData.confirmPassword" class="error"
-            ><br />Las contraseñas no coinciden</span
+            ><br />The passwords dont match</span
           >
         </div>
       </div>
       <div class="buttons-wrapper">
         <main-button class="btn-black" type="button" @click="login"
-          >Iniciar Sesión</main-button
+          >Sign in </main-button
         >
-        <main-button class="btn-white" type="submit">Crear</main-button>
+        <main-button class="btn-white" type="submit">Create</main-button>
       </div>
     </form>
   </div>

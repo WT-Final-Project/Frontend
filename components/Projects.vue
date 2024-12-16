@@ -1,7 +1,7 @@
 <template>
   <div class="projects-container">
     <div class="header">
-      <h1>MIS PROYECTOS</h1>
+      <h1>MY PROJECTS</h1>
     </div>
       <div class="project" v-for="project in projects" :key="project.idproyecto" @click="selectProject(project.idproyecto)">
         <nav>

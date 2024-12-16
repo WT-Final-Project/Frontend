@@ -2,9 +2,9 @@
     <header class="main-header">
       <nav>
         <ul>
-          <li><NuxtLink to="/proyecto">PROYECTO</NuxtLink></li>
-          <li><NuxtLink to="/mis-tareas">TAREAS</NuxtLink></li>
-          <li><NuxtLink to="/participantes">PARTICIPANTES</NuxtLink></li>
+          <li><NuxtLink to="/proyecto">PROJECT</NuxtLink></li>
+          <li><NuxtLink to="/mis-tareas">TASKS</NuxtLink></li>
+          <li><NuxtLink to="/participantes">PARTICIPANTS</NuxtLink></li>
         </ul>
       </nav>
     </header>

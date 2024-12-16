@@ -38,12 +38,12 @@
         if(result.data._value != null) {
           window.location.reload(true);
         } else {
-          alert('Ha ocurrido un error!');
+          alert('An error has occur!');
         }
 
       } catch (error) {
         console.error(error);
-        alert("Error al eliminar participante");
+        alert("Error eliminating the participant");
       }
   }
   </script>

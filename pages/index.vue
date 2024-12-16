@@ -6,36 +6,32 @@
       </div>
 
       <div class="button-group">
-        <MainButton class="btn-black" @click="login">Iniciar Sesión</MainButton>
+        <MainButton class="btn-black" @click="login">Sing in</MainButton>
         <MainButton class="btn-white" @click="createAccount"
-          >Crear Cuenta</MainButton
+          >Create account</MainButton
         >
       </div>
     </header>
 
     <main>
       <div class="container">
-        <p class="central-text-principal">¡¡ BIENVENIDO A TASKABLE !!</p>
+        <p class="central-text-principal">¡¡ WELCOME TO TASKTABLE !!</p>
         <br />
         <p class="central-text-contenido">
-          En Taskable, estamos comprometidos en hacer que la gestión de
-          proyectos sea más eficiente y exitosa para tu equipo. <br />
-          Nuestra plataforma intuitiva y completa te permite planificar,
-          colaborar y realizar un seguimiento de tus proyectos <br />de manera
-          efectiva, brindándote las herramientas necesarias para alcanzar tus
-          objetivos.
+          At Taskable, we are committed to making project management more efficient and successful for your team. <br />
+          Our intuitive and comprehensive platform allows you to plan, collaborate, and effectively track your projects, <br />
+          providing you with the necessary tools to achieve your goals.
         </p>
         <p class="central-text-contenido">
-          Inicia sesión o create una cuenta para poder acceder a todos nuestros
-          servicios
+          Log in or create an account to access all our services.
         </p>
 
         <div class="button-group-inferior">
           <MainButton class="btn-black" @click="login"
-            >Iniciar Sesión</MainButton
+            >Sign In</MainButton
           >
           <MainButton class="btn-white" @click="createAccount"
-            >Crear Cuenta</MainButton
+            >Create account</MainButton
           >
         </div>
       </div>
