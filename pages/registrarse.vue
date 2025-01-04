@@ -62,8 +62,8 @@
       </div>
       <div class="buttons-wrapper">
         <main-button class="btn-black" type="button" @click="login"
-          >Sign in </main-button
-        >
+          >Sign in
+        </main-button>
         <main-button class="btn-white" type="submit">Create</main-button>
       </div>
     </form>
@@ -98,7 +98,7 @@ const passwordsMatch = computed(() => {
 const register = async () => {
   try {
     if (passwordsMatch.value) {
-      const data = await $fetch("http://localhost:3001/user/singup", {
+      const data = await $fetch("http://localhost:3001/user/signup", {
         method: "post",
         body: {
           email: formData.value.email,
