@@ -88,7 +88,7 @@ const eliminar = async () => {
       store.setProyId(undefined);
       navigateTo("/pantalla-inicio");
     } else {
-      alert("¡An error has occur!");
+      alert("¡Something went wrong!");
     }
   } catch (error) {
     console.error(error);
