@@ -5,7 +5,7 @@
       <div class="container">
         <form @submit.prevent="submitForm">
           <h2 class="title">CONFIGUERE ACCOUNT</h2>
-          <div class="form-row">
+          <!-- <div class="form-row">
             <div class="input-group">
               <label for="user">User name: {{ userId }}</label>
             </div>
@@ -41,7 +41,7 @@
                 required
               />
             </div>
-          </div>
+          </div> -->
           <div class="form-row">
             <div class="input-group">
               <label for="password">Password: </label>
@@ -102,10 +102,10 @@ const store = useCookieStore();
 const userId = store.userId;
 
 const formData = ref({
-  email: "",
+  // email: "",
   newPassword: "",
-  name: "",
-  lastName: "",
+  // name: "",
+  // lastName: "",
   confirmPassword: "",
 });
 
@@ -116,23 +116,33 @@ const passwordsMatch = computed(() => {
 const submitForm = async () => {
   if (passwordsMatch.value) {
     try {
-      const result = await useFetch(
-        "http://localhost:3001/usuario/actualizar/" + userId,
-        {
-          method: "post",
-          body: {
-            correo: formData.value.email,
-            nombre: formData.value.name,
-            apellidos: formData.value.lastName,
-            contrasenya: formData.value.newPassword,
-          },
-        }
+      // const result = await useFetch(
+      //   "http://localhost:3001/usuario/actualizar/" + userId,
+      //   {
+      //     method: "post",
+      //     body: {
+      //       correo: formData.value.email,
+      //       nombre: formData.value.name,
+      //       apellidos: formData.value.lastName,
+      //       contrasenya: formData.value.newPassword,
+      //     },
+      //   }
+      // );
+      // console.log(result);
+      // if (result.data._value != null) {
+      //   navigateTo("/pantalla-inicio");
+      // } else {
+      //   alert("¡Something went wrong!");
+      // }
+
+      const { error, success } = await store.changePassword(
+        formData.value.newPassword
       );
-      console.log(result);
-      if (result.data._value != null) {
+
+      if (success) {
         navigateTo("/pantalla-inicio");
-      } else {
-        alert("¡Something went wrong!");
+      } else if (error) {
+        console.error(error);
       }
     } catch (error) {
       console.error(error);

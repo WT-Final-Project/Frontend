@@ -15,15 +15,14 @@
         <main-button class="btn-white" @click="createAccount"
           >CREATE ACCOUNT</main-button
         >
-        <main-button class="btn-black" type="submit"
-          >SIGN IN</main-button
-        >
+        <main-button class="btn-black" type="submit">SIGN IN</main-button>
       </div>
     </form>
   </div>
 </template>
 
 <script setup>
+import { errorMessages } from "vue/compiler-sfc";
 import { useCookieStore } from "~/stores";
 
 const store = useCookieStore();
@@ -38,22 +37,34 @@ onMounted(() => {
 });
 
 const login = async () => {
+  // try {
+  //   const { data, error } = await $fetch("http://localhost:3001/user/signin", {
+  //     method: "post",
+  //     body: {
+  //       email: email.value,
+  //       password: password.value,
+  //     },
+  //   });
+
+  //   if (error) {
+  //     console.error(error);
+  //   }
+
+  //   if (data) {
+  //     store.setUserId(data);
+  //     navigateTo("/pantalla-inicio");
+  //   }
+  // } catch (error) {
+  //   console.error("Something went wrong on the signin: ", error);
+  //   alert("¡Something went wrong!");
+  // }
   try {
-    const { data, error } = await $fetch("http://localhost:3001/user/signin", {
-      method: "post",
-      body: {
-        email: email.value,
-        password: password.value,
-      },
-    });
+    const { success, error } = await store.signin(email.value, password.value);
 
-    if (error) {
-      console.error(error);
-    }
-
-    if (data) {
-      store.setUserId(data);
+    if (success) {
       navigateTo("/pantalla-inicio");
+    } else if (error) {
+      console.error(error);
     }
   } catch (error) {
     console.error("Something went wrong on the signin: ", error);
