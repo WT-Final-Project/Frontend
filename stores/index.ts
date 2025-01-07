@@ -1,25 +1,16 @@
 // stores/cookiee.js (your Pinia store)
 import { defineStore } from "pinia";
-import supabase from "~/plugins/supabase";
 
 export const useCookieStore = defineStore("cookiee", () => {
   const userId = useCookie("userIdCookie", { maxAge: 60 * 60 });
   const proyId = useCookie("proyIdCookie", { maxAge: 60 * 60 });
   const tareaId = useCookie("tareaIdCookie", { maxAge: 60 * 60 });
-  const user = ref(); // Store for user data
 
   const setUserId = (data?: string) => (userId.value = data);
   const setProyId = (data?: string) => (proyId.value = data);
   const setTareaId = (data?: string) => (tareaId.value = data);
 
-  const fetchUser = async () => {
-    const { data: userData, error } = await supabase.auth.getUser();
-    if (error) {
-      console.error("Error fetching user", error);
-      return;
-    }
-    user.value = userData;
-  };
+  const { $supabase } = useNuxtApp();
 
   // Add methods for updating password and email
   const changePassword = async (newPassword) => {
@@ -27,8 +18,6 @@ export const useCookieStore = defineStore("cookiee", () => {
       if (!newPassword) {
         return { error: "New password cannot be empty" };
       }
-
-      const { $supabase } = useNuxtApp();
 
       // Attempt to update the password
       const { error: updateError } = await $supabase.auth.updateUser({
@@ -63,8 +52,6 @@ export const useCookieStore = defineStore("cookiee", () => {
         return { error: "New email cannot be empty" };
       }
 
-      const { $supabase } = useNuxtApp();
-
       // Attempt to update the email
       const { error: changeError } = await $supabase.auth.updateUser({
         email: newEmail,
@@ -79,7 +66,6 @@ export const useCookieStore = defineStore("cookiee", () => {
         };
       }
 
-      // Return success indicator explicitly
       return { success: true };
     } catch (error) {
       console.error(
@@ -95,8 +81,6 @@ export const useCookieStore = defineStore("cookiee", () => {
       if (!email || !password) {
         return { error: "Empty fields" };
       }
-
-      const { $supabase } = useNuxtApp();
 
       const { data: signinUser, error: signinError } =
         await $supabase.auth.signInWithPassword({
@@ -131,7 +115,28 @@ export const useCookieStore = defineStore("cookiee", () => {
 
       return { success: true };
     } catch (error) {
-      console.error("Error fetching files:", error);
+      console.error(error);
+      return { error };
+    }
+  };
+
+  const logout = async () => {
+    try {
+      const { error: logoutError } = await $supabase.auth.signOut();
+
+      if (logoutError) {
+        console.error(
+          `There was an error logging out in: ${logoutError.message}`
+        );
+        return {
+          error: `There was an error logging out: ${logoutError.message}`,
+        };
+      }
+
+      navigateTo("/");
+    } catch (error) {
+      console.error(error);
+      return error;
     }
   };
 
@@ -142,9 +147,9 @@ export const useCookieStore = defineStore("cookiee", () => {
     setUserId,
     setProyId,
     setTareaId,
-    fetchUser,
     changePassword,
     changeEmail,
     signin,
+    logout,
   };
 });

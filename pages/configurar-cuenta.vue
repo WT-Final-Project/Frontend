@@ -2,53 +2,72 @@
   <div>
     <Cabecera />
     <div class="config-container">
+      <!-- Account Information Form -->
       <div class="container">
-        <form @submit.prevent="submitForm">
-          <h2 class="title">CONFIGUERE ACCOUNT</h2>
-          <!-- <div class="form-row">
+        <form @submit.prevent="submitAccountInfo">
+          <h2 class="title">CONFIGURE ACCOUNT</h2>
+          <div class="form-row">
             <div class="input-group">
               <label for="user">User name: {{ userId }}</label>
             </div>
             <div>
-              <label for="email">Email: </label>
+              <label for="name">Name: </label>
               <input
-                type="email"
-                id="email"
-                v-model="formData.email"
-                placeholder="Correo"
+                type="text"
+                id="name"
+                v-model="accountData.name"
+                placeholder="Nombre Usuario"
                 required
               />
             </div>
           </div>
           <div class="form-row">
             <div class="input-group">
-              <label for="user">Name: </label>
+              <label for="lastName">Surname: </label>
               <input
                 type="text"
-                id="user"
-                v-model="formData.name"
-                placeholder="Nombre Usuario"
+                id="lastName"
+                v-model="accountData.lastName"
+                placeholder="Apellido"
                 required
               />
             </div>
-            <div>
-              <label for="email">Surname: </label>
+          </div>
+          <button class="submit-button" type="submit">Save Account Info</button>
+        </form>
+      </div>
+
+      <!-- Email Change Form -->
+      <div class="container">
+        <form @submit.prevent="submitEmailChange">
+          <h2 class="title">CHANGE EMAIL</h2>
+          <div class="form-row">
+            <div class="input-group">
+              <label for="email">New Email: </label>
               <input
                 type="email"
                 id="email"
-                v-model="formData.lastName"
-                placeholder="Correo"
+                v-model="emailData.newEmail"
+                placeholder="Nuevo correo"
                 required
               />
             </div>
-          </div> -->
+          </div>
+          <button class="submit-button" type="submit">Change Email</button>
+        </form>
+      </div>
+
+      <!-- Password Change Form -->
+      <div class="container">
+        <form @submit.prevent="submitPasswordChange">
+          <h2 class="title">CHANGE PASSWORD</h2>
           <div class="form-row">
             <div class="input-group">
-              <label for="password">Password: </label>
+              <label for="password">New Password: </label>
               <input
                 type="password"
                 id="password"
-                v-model="formData.newPassword"
+                v-model="passwordData.newPassword"
                 placeholder="Nueva contraseña"
                 required
               />
@@ -57,36 +76,37 @@
               <label for="confirmPassword">Repeat Password: </label>
               <input
                 type="password"
-                if="confirmPassword"
-                v-model="formData.confirmPassword"
+                id="confirmPassword"
+                v-model="passwordData.confirmPassword"
                 placeholder="Repetir contraseña"
                 required
               />
               <span
-                v-if="!passwordsMatch && formData.confirmPassword"
+                v-if="!passwordsMatch && passwordData.confirmPassword"
                 class="error"
-                >Passwords dont match</span
+                >Passwords don't match</span
               >
             </div>
           </div>
-        </form>
-        <div class="button-container">
-          <button class="logout-button" @click="logout">Close session</button>
           <button
             class="submit-button"
-            @click="submitForm"
+            type="submit"
             :disabled="!passwordsMatch"
           >
-            Save changes
+            Change Password
           </button>
-        </div>
+        </form>
       </div>
+    </div>
+
+    <div class="button-container">
+      <button class="logout-button" @click="logout">Close session</button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { computed } from "vue";
 import { useCookieStore } from "~/stores";
 
 definePageMeta({
@@ -101,90 +121,120 @@ onMounted(() => {
 const store = useCookieStore();
 const userId = store.userId;
 
-const formData = ref({
-  // email: "",
+// Split form data into separate refs
+const accountData = ref({
+  name: "",
+  lastName: "",
+});
+
+const emailData = ref({
+  newEmail: "",
+});
+
+const passwordData = ref({
   newPassword: "",
-  // name: "",
-  // lastName: "",
   confirmPassword: "",
 });
 
+// Compute if passwords match
 const passwordsMatch = computed(() => {
-  return formData.value.newPassword === formData.value.confirmPassword;
+  return passwordData.value.newPassword === passwordData.value.confirmPassword;
 });
 
-const submitForm = async () => {
+// Form submission handlers
+const submitAccountInfo = async () => {
+  try {
+    const response = await $fetch("http://localhost:3001/user/" + userId, {
+      method: "put",
+      body: {
+        name: accountData.value.name,
+        lastName: accountData.value.lastName,
+      },
+    });
+
+    if (response?.error) {
+      console.error(response.error);
+    } else {
+      console.log("Account information updated successfully");
+    }
+  } catch (error) {
+    console.error("Error saving account information:", error);
+    alert("Error saving account information");
+  }
+};
+
+const submitEmailChange = async () => {
+  try {
+    const { error, success } = await store.changeEmail(
+      emailData.value.newEmail
+    );
+
+    if (success) {
+      alert("Check your email box to complete the change");
+      store.logout();
+    } else if (error) {
+      console.error(error);
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Error changing email");
+  }
+};
+
+const submitPasswordChange = async () => {
   if (passwordsMatch.value) {
     try {
-      // const result = await useFetch(
-      //   "http://localhost:3001/usuario/actualizar/" + userId,
-      //   {
-      //     method: "post",
-      //     body: {
-      //       correo: formData.value.email,
-      //       nombre: formData.value.name,
-      //       apellidos: formData.value.lastName,
-      //       contrasenya: formData.value.newPassword,
-      //     },
-      //   }
-      // );
-      // console.log(result);
-      // if (result.data._value != null) {
-      //   navigateTo("/pantalla-inicio");
-      // } else {
-      //   alert("¡Something went wrong!");
-      // }
-
       const { error, success } = await store.changePassword(
-        formData.value.newPassword
+        passwordData.value.newPassword
       );
 
       if (success) {
-        navigateTo("/pantalla-inicio");
+        alert("Password changed successfully!");
+        store.logout();
       } else if (error) {
         console.error(error);
       }
     } catch (error) {
       console.error(error);
-      alert("Error modifying the account");
+      alert("Error changing password");
     }
   }
 };
 
+// Logout handler
 const logout = () => {
-  navigateTo("/");
+  store.logout();
 };
 </script>
 
 <style scoped>
 .button-container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
   margin-top: 40px;
-  text-align: center;
 }
 
-.logout-button,
-.submit-button {
+.logout-button {
   padding: 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   width: 150px;
-  margin: 0 auto;
-  margin-top: 20px;
   font-size: 15px;
-}
-
-.logout-button {
   background-color: #ff6666;
   color: white;
 }
 
 .submit-button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 200px;
+  font-size: 15px;
   background-color: #000000;
   color: white;
+  margin-top: 20px;
 }
 
 .title {
@@ -192,20 +242,23 @@ const logout = () => {
   font-size: 55px;
   margin-bottom: 40px;
 }
+
 .container {
   background-color: #f5f5f5;
   padding: 20px;
-  margin: 150px auto;
+  margin: 20px auto;
   max-width: 850px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 .form-row {
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
   font-size: 20px;
 }
+
 .input-group {
   flex: 1;
   margin-right: 10px;
