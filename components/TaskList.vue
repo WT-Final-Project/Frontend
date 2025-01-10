@@ -1,12 +1,12 @@
 <template>
     <div class="task-list">
         <ul>
-          <li v-for="task in tasks" :key="task.idtarea" class="task">
+          <li v-for="task in tasks" :key="task.id" class="task">
             <div class="container">
-              <div @click="() => goToTaskDetails(task.idtarea)">
+              <div @click="() => goToTaskDetails(task.id)">
                 <strong>{{ task.titulo }}</strong>
-                <p>Assigned to: {{ task.nombreusuario }}</p>
-                <p>Due date: {{ task.fechavencimineto }}</p>
+                <p>Assigned to: {{ task.username }}</p>
+                <p>Due date: {{ task.due }}</p>
               </div>
             </div>
           </li>
@@ -33,22 +33,23 @@
   </script>
   
   <style scoped>
-
-  .container {
-    background-color: silver; 
-    padding: 15px; 
-    margin: 15px auto; 
-    max-width: 640px; 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-    border: 2px solid; 
-    cursor: pointer;
-    border-color: #000; 
-    transition: background-color 0.3s ease; 
+.container {
+  background-color: #fff;
+  padding: 15px;
+  margin: 15px auto;
+  max-width: 640px;
+  border: 4px solid silver;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.4);
+  transition: box-shadow 0.3s, transform 0.3s;
+  cursor: pointer;
+  font-family: "Georgia", serif;
 }
 .container:hover {
-  background-color: lightgray; 
+  box-shadow: 0 0 25px rgba(255, 165, 0, 0.6);
+  transform: scale(1.01);
 }
- 
+
   
   </style>
   

@@ -1,13 +1,13 @@
 <template>
-  <div class="bottom-right-bar">>
-    <button id="zoom-btn" class="btn-white">Zoom</button>
-    <button id="toggle-theme-btn" class="btn-white">Cambiar Tema</button>
-    <button id="speak-btn" class="btn-white">Speak</button>
+  <div class="bottom-right-bar">
+    <button id="zoom-btn" @click="toggleZoom"><i class="fas fa-search"></i></button>
+    <button id="speak-btn" @click="speakTasks"><i class="fas fa-volume-up"></i></button>
+    <button id="toggle-theme-btn" @click="toggleTheme"><i class="fas fa-adjust"></i></button>
   </div>
 </template>
 
 <script setup>
-
+import { toggleTheme, toggleZoom, speakTasks } from "assets/js/funciones.js";
 </script>
 
 <style scoped>

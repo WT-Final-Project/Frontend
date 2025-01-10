@@ -1,12 +1,12 @@
 <template>
     <div class="participants-list">
       <ul>
-        <li class="container-participante" v-for="participant in participants" :key="participant.nombreusuario">
+        <li class="container-participante" v-for="participant in participants" :key="participant.username">
           <div class="participant-info">
-            {{ participant.nombreusuario }} - {{ participant.rango }}
+            {{ participant.username }} - {{ participant.rank }}
           </div>
-          <div class="delete-box" v-if="user.rango === 'lider' && participant.nombreusuario != userId">
-            <span class="close-icon" @click="eliminar(participant.nombreusuario)">X</span>
+          <div class="delete-box" v-if="user.rank === 'lider' && participant.username != userId">
+            <span class="close-icon" @click="eliminar(participant.username)">X</span>
           </div>
         </li>
       </ul>
@@ -20,7 +20,7 @@
   const userId = store.userId;
   const proyId = store.proyId;
 
-  const { data: user } = await useFetch('http://localhost:3001/participan/obtener/'+proyId+'/'+userId)
+  const { data: user } = await useFetch('http://localhost:3001/'+userId)
 
   const props = defineProps({
     participants: Array
@@ -29,7 +29,7 @@
   const eliminar = async (delUser) => {
     console.log(delUser);
       try {
-        const result = await useFetch('http://localhost:3001/participan/borrar/'+proyId+'/'+delUser, {
+        const result = await useFetch('http://localhost:3001/'+proyId+'/'+userId, {
           method: 'delete',
         });
 
@@ -49,44 +49,56 @@
   </script>
   
   <style scoped>
-    .container-participante {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: silver; 
-    padding: 20px; 
-    margin: 30px auto; 
-    max-width: 640px; 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-    border: 2px solid; 
-    border-color: #000; 
-    }
+.container-participante {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 20px;
+  margin: 30px auto;
+  max-width: 640px;
+  border: 4px solid silver;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.4);
+  transition: box-shadow 0.3s, transform 0.3s;
+  font-family: "Georgia", serif;
+}
 
-    .participant-info {
-    flex-grow: 1;
-    font-size: 18px;
-    }
+.container-participante:hover {
 
-    .delete-box {
-    width: 35px;  
-    height: 35px;
-    background-color: #585858; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid; 
-    border-color: #000;
-    border-radius: 10px; 
-    transition: background-color 0.3s ease; 
-    }
-    .delete-box:hover {
-    background-color: rgb(128, 125, 125); 
-    }
+  box-shadow: 0 0 25px rgba(255, 165, 0, 0.6);
+  transform: scale(1.01);
+}
 
-    .close-icon {
-    color: #ff0000; 
-    font-size: 30px; 
-    cursor: pointer;
-    }
+
+.participant-info {
+  flex-grow: 1;
+  font-size: 18px;
+  color: #333;
+}
+
+.delete-box {
+  width: 40px;
+  height: 40px;
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #000;
+  border-radius: 10px;
+  transition: background-color 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+
+.delete-box:hover {
+  background-color: #555;
+  transform: scale(1.05);
+}
+
+
+.close-icon {
+  color: #ff0000;
+  font-size: 30px;
+}
   </style>
   

@@ -14,5 +14,4 @@ export default defineNuxtConfig({
       supabaseKey: process.env.SUPABASE_ANON_KEY,
     },
   },
-  plugins: ["~/plugins/funiones.js"],
 });

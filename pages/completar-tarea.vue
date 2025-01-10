@@ -4,35 +4,35 @@
       <BackButton :to="'/proyecto'" />
     </div>
     <div class="task-form">
-      <h1 class="title">{{ task.titulo }}</h1>
+      <h1 class="title">{{ task.title }}</h1>
       <div class="container2">
         <div class="form-group">
           <label class="negrita">Description:</label>
-          <p>{{ task.descripcion }}</p>
+          <p>{{ task.description }}</p>
         </div>
 
         <div class="form-group">
           <label class="negrita">Due date:</label>
-          <p>{{ task.fechavencimineto }}</p>
+          <p>{{ task.duedate }}</p>
         </div>
 
-        <div class="form-group" v-if="user.rango === 'lider'">
+        <div class="form-group" v-if="user.rank === 'lider'">
           <label class="negrita">State:</label>
-          <p>{{ task.completada === 1 ? "Completada" : "Pendiente" }}</p>
+          <p>{{ task.completed === 1 ? "Completada" : "Pendiente" }}</p>
         </div>
       </div>
 
       <div
         class="form-group"
-        v-if="user.rango === 'lider' && task.completada === 1"
+        v-if="user.rank === 'lider' && task.completed === 1"
       >
         <label class="negrita">Archives:</label>
-        <p>{{ fichero.nombre }}</p>
+        <p>{{ fichero.name }}</p>
       </div>
 
       <div
         class="form-group"
-        v-if="userId === task.nombreusuario && task.completada === 0"
+        v-if="userId === task.username && task.completed === 0"
       >
         <label for="file" class="negrita">Archives:</label>
         <input type="file" id="file" @change="handleFileUpload" />
@@ -41,7 +41,7 @@
       <button
         @click="submitTask"
         class="submit-button"
-        v-if="userId === task.nombreusuario && task.completada === 0"
+        v-if="userId === task.username && task.completed === 0"
       >
         Complete task
       </button>
@@ -68,15 +68,15 @@ const file = ref({
 });
 
 const { data: task } = await useFetch(
-  "http://localhost:3001/tarea/obtener/" + tareaId
+  "http://localhost:3001/" + tareaId
 );
 
 const { data: user } = await useFetch(
-  "http://localhost:3001/participan/obtener/" + proyId + "/" + userId
+  "http://localhost:3001/all" + proyId + "/" + userId
 );
 
 const { data: fichero } = await useFetch(
-  "http://localhost:3001/fichero/obtenerPorTarea/" + tareaId
+  "http://localhost:3001/" + tareaId
 ); //hacer esto aqui podria dar algun problema los vacios
 
 /*watchEffect(async () => {
@@ -90,7 +90,7 @@ const submitTask = async () => {
   if (userId == task._value.nombreusuario) {
     try {
       const result = await useFetch(
-        "http://localhost:3001/tarea/completar/" + tareaId,
+        "http://localhost:3001/complete/" + tareaId,
         {
           method: "post",
           body: {
@@ -101,7 +101,7 @@ const submitTask = async () => {
 
       if (result.data._value != null) {
         if (hasFile) {
-          const subir = await useFetch("http://localhost:3001/fichero/crear", {
+          const subir = await useFetch("http://localhost:3001/", {
             method: "post",
             body: {
               idTarea: tareaId,
@@ -144,40 +144,79 @@ function handleFileUpload(event) {
 .title {
   font-size: 55px;
   margin-bottom: 30px;
+  color: #000;
+  text-transform: uppercase;
+  text-align: center;
+  font-family: "Georgia", serif;
 }
 
+
 .container {
-  background-color: #f5f5f5;
+  background-color: #fff;
   padding: 40px;
   margin: 50px auto;
   max-width: 750px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  border: 4px solid silver;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.4);
+  transition: box-shadow 0.3s, transform 0.3s;
+  font-family: "Georgia", serif;
+}
+
+.container:hover {
+  box-shadow: 0 0 25px rgba(255, 165, 0, 0.6);
+  transform: scale(1.01);
 }
 
 .container2 {
   position: relative;
-  background-color: silver;
+  background-color: #fff;
   padding: 20px;
   margin: 20px auto;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border: 2px solid;
-  border-color: #000;
+
+  border: 4px solid silver;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.4);
+  transition: box-shadow 0.3s, transform 0.3s;
+  font-family: "Georgia", serif;
 }
+
+.container2:hover {
+  box-shadow: 0 0 25px rgba(255, 165, 0, 0.6);
+  transform: scale(1.01);
+}
+
 
 .form-group {
   font-size: 20px;
   margin-bottom: 15px;
+  color: #333;
+  font-family: inherit;
 }
 
 .submit-button {
   font-size: 20px;
   margin-top: 35px;
   cursor: pointer;
+  padding: 10px 20px;
+  border: 2px solid #000;
+  border-radius: 30px;
+  background-color: #fff;
+  color: #000;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
+
+.submit-button:hover {
+  background-color: #f2f2f2;
+  transform: scale(1.03);
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
 
 .negrita {
   font-weight: bold;
 }
+
 </style>

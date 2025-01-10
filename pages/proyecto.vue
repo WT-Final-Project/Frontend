@@ -7,8 +7,8 @@
       <div class="container">
         <BackButton :to="'/pantalla-inicio'" />
 
-        <h1 class ="title"> {{ project.nombre }}</h1>
-        <p class=" desc">{{project.descripcion}}</p>
+        <h1 class ="title"> {{ project.name }}</h1>
+        <p class=" desc">{{project.description}}</p>
         <div v-if="userRango === 'lider'">
           <NuxtLink to="/crear-tarea">
             <MainButton class="custom-button">ADD TASK</MainButton>
@@ -48,50 +48,70 @@
   const userId = store.userId;
   
 
-  const { data: project } = await useFetch('http://localhost:3001/proyecto/obtener/'+proyId);
+  const { data: project } = await useFetch('http://localhost:3001/'+proyId);
 
-  const { data: tasks } = await useFetch('http://localhost:3001/tarea/obtenerPorProyecto/'+proyId);
+  const { data: tasks } = await useFetch('http://localhost:3001/uncompleted/'+proyId);
   
-  const { data: tasksAll } = await useFetch('http://localhost:3001/tarea/obtenerPorProyectoTodas/'+proyId);
+  const { data: tasksAll } = await useFetch('http://localhost:3001/all/'+proyId);
 
-  const { data: userRoleResponse } = await useFetch('http://localhost:3001/participan/obtener/'+proyId+'/'+userId);
+  const { data: userRoleResponse } = await useFetch('http://localhost:3001/all/'+proyId+'/'+userId);
 
-  const userRango = ref(userRoleResponse._value.rango);
+  const userRango = ref(userRoleResponse._value.rank);
 
 </script>
   
 <style scoped>
 
-  .title {
-    text-align: center;
-    font-size: 55px;
-    margin-bottom: 20px;
-  }
+.title {
+  text-align: center;
+  font-size: 55px;
+  margin-bottom: 20px;
+  color: #000;
+  font-family: "Georgia", serif;
+  text-transform: uppercase;
+}
 
-  .desc {
-    text-align: center;
-    font-size: 22px;
-    margin-bottom: 40px;
-  }
+.desc {
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 40px;
+  color: #333;
+  font-family: "Georgia", serif;
+}
+
 .settings {
-    position: fixed;
-    z-index: 9999;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    background: transparent; 
+  position: fixed;
+  z-index: 9999;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  background: transparent;
+  top: 20px;
+  right: 20px;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.settings:hover {
+  box-shadow: 0 0 10px rgba(255, 165, 0, 0.4);
+  transform: scale(1.05);
 }
 
 
+.container {
+  background-color: #fff;
+  padding: 40px;
+  margin: 50px auto;
+  max-width: 750px;
+  border: 4px solid silver;           /
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.4);
+  transition: box-shadow 0.3s, transform 0.3s;
+  font-family: "Georgia", serif;
+}
 
+.container:hover {
+  box-shadow: 0 0 25px rgba(255, 165, 0, 0.6);
+  transform: scale(1.01);
+}
 
-  .container {
-    background-color: #f5f5f5; 
-    padding: 40px; 
-    margin: 50px auto; 
-    max-width: 750px; 
-    border-radius: 10px; 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-  }
   </style>
   

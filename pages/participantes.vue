@@ -14,7 +14,7 @@ import { ref, onMounted } from "vue";
 const store = useCookieStore();
 const proyId = store.proyId
 
-const { data: participants } = await useFetch('http://localhost:3001/participan/usuariosProyecto/'+proyId)
+const { data: participants } = await useFetch('http://localhost:3001/all/'+proyId)
 
 definePageMeta({
   middleware: ["auth"],
@@ -31,54 +31,81 @@ onMounted(() => {
   justify-content: center;
   font-size: 55px;
   margin-bottom: 50px;
+  color: #000;
+  text-transform: uppercase;
+  font-family: "Georgia", serif;
 }
 
+
 .container {
-  background-color: #f5f5f5; 
-  padding: 40px; 
-  margin: 50px auto; 
-  max-width: 750px; 
-  border-radius: 10px; 
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+  background-color: #fff;
+  padding: 40px;
+  margin: 50px auto;
+  max-width: 750px;
+  border: 4px solid silver;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.4);
+  transition: box-shadow 0.3s, transform 0.3s;
+  font-family: "Georgia", serif;
 }
+
+.container:hover {
+  box-shadow: 0 0 25px rgba(255, 165, 0, 0.6);
+  transform: scale(1.01);
+}
+
 
 .container-participante {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: silver; 
-  padding: 20px; 
-  margin: 30px auto; 
-  max-width: 640px; 
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-  border: 2px solid; 
-  border-color: #000; 
+  padding: 20px;
+  margin: 30px auto;
+  max-width: 640px;
+
+  background-color: #fff;
+  border: 4px solid silver;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.4);
+  transition: box-shadow 0.3s, transform 0.3s;
+  font-family: inherit;
 }
+
+.container-participante:hover {
+  box-shadow: 0 0 25px rgba(255, 165, 0, 0.6);
+  transform: scale(1.01);
+}
+
 
 .participant-info {
   flex-grow: 1;
   font-size: 18px;
+  color: #333;
 }
 
+
 .delete-box {
-  width: 35px;  
+  width: 35px;
   height: 35px;
-  background-color: #585858; 
+  background-color: #333;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid; 
-  border-color: #000;
-  border-radius: 10px; 
-  transition: background-color 0.3s ease; 
+  border: 2px solid #000;
+  border-radius: 10px;
+  transition: background-color 0.3s, transform 0.3s;
+  cursor: pointer;
 }
+
 .delete-box:hover {
-  background-color: rgb(128, 125, 125); 
+  background-color: #555;
+  transform: scale(1.05);
 }
 
 .close-icon {
-  color: #ff0000; 
-  font-size: 30px; 
+  color: #ff0000;
+  font-size: 30px;
   cursor: pointer;
 }
+
 </style>

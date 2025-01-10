@@ -12,7 +12,7 @@
 
         <div class="form-group">
           <label for="taskName">Task name</label>
-          <input type="text" id="taskName" v-model="dataForm.nombre" required />
+          <input type="text" id="taskName" v-model="dataForm.name" required />
         </div>
 
         <div class="form-group">
@@ -20,7 +20,7 @@
           <input
             type="descripcion"
             id="taskName"
-            v-model="dataForm.descripcion"
+            v-model="dataForm.description"
             required
           />
         </div>
@@ -30,16 +30,16 @@
           <input
             type="date"
             id="fechavencimineto"
-            v-model="dataForm.fechavencimineto"
+            v-model="dataForm.due"
             required
           />
         </div>
 
         <div class="form-group">
           <label for="nombreusuario">Assign to</label>
-          <select id="nombreusuario" v-model="dataForm.nombreUsuario" required>
-            <option v-for="user in users" :value="user.nombreusuario">
-              {{ user.nombre }}
+          <select id="nombreusuario" v-model="dataForm.username" required>
+            <option v-for="user in users" :value="user.username">
+              {{ user.name }}
             </option>
           </select>
         </div>
@@ -71,7 +71,7 @@ const dataForm = ref({
 });
 
 const { data: users } = await useFetch(
-  "http://localhost:3001/participan/usuariosProyecto/" + proyId
+  "http://localhost:3001/all/" + proyId
 );
 
 const submitTask = async () => {
@@ -104,8 +104,12 @@ const submitTask = async () => {
   position: absolute;
   cursor: pointer;
   font-size: 2em;
+  top: 20px;      /* Ajusta según donde quieras ubicar el botón */
+  right: 20px;
+  color: #ff0000; /* Botón de cierre en rojo */
 }
 
+/* Encabezado para "Create Task" */
 .create-task-header {
   display: flex;
   justify-content: center;
@@ -113,21 +117,39 @@ const submitTask = async () => {
   margin: 20px 20px;
   font-size: 40px;
   height: 100px;
+  font-family: "Georgia", serif;
+  color: #000; /* Texto oscuro */
 }
 
+/* Contenedor principal con glow naranja y esquinas redondeadas */
 .container {
-  background-color: #f5f5f5;
+  background-color: #fff;
   padding: 40px;
   margin: 150px auto;
   max-width: 550px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  border: 4px solid silver; /* Borde plateado */
+  border-radius: 20px;      /* Esquinas redondeadas */
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.4);
+  transition: box-shadow 0.3s, transform 0.3s;
+  font-family: "Georgia", serif;
 }
 
+.container:hover {
+  box-shadow: 0 0 25px rgba(255, 165, 0, 0.6);
+  transform: scale(1.01);
+}
+
+/* Grupos de formulario */
 .form-group {
   margin-bottom: 30px;
+  font-family: inherit; /* Hereda la misma fuente del contenedor */
+  color: #333;
 }
+
 .form-group label {
   display: block;
+  font-weight: bold;
 }
+
 </style>
