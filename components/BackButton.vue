@@ -5,7 +5,7 @@
   </template>
   
   <script setup>
-  // Define props received by the component
+
   const props = defineProps({
     to: {
       type: String,

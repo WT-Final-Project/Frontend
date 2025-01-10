@@ -1,24 +1,32 @@
 <template>
-    <div>
-      <Cabecera />
-      <form @submit.prevent="joinProject">
-        <div class="container">
-          <h2 class="title">JOIN THE PROJECT</h2>
-          <div class="form-row">
-            <label for="accessCode">Enter the access code here:</label>
-          </div>
-          <input 
-            id="accessCode" 
-            type="text" 
-            v-model="dataForm.accessCode" 
-            required 
-            placeholder="Código de acceso" 
-          />
-          <button type="submit">Join</button>
+  <div>
+    <Cabecera />
+    <form @submit.prevent="joinProject">
+      <div class="container">
+        <h2 class="title">JOIN THE PROJECT</h2>
+
+        <div class="form-row">
+          <label for="accessCode">Enter the access code here:</label>
         </div>
-      </form>
-    </div>
-  </template>
+
+        <input
+          id="accessCode"
+          type="text"
+          v-model="dataForm.accessCode"
+          required
+          placeholder="Código de acceso"
+          class="access-input"
+        />
+
+        <div class="button-wrapper">
+          <button type="submit" class="join-button">Join</button>
+        </div>
+      </div>
+    </form>
+    <BottonBar />
+  </div>
+</template>
+
   
   <script setup>
   import { ref } from 'vue';
@@ -67,26 +75,81 @@
   
   <style scoped>
 
-  .title {
-    text-align: center;
-    font-size: 55px;
-    margin-bottom: 40px;
-  }
-  .container {
-    background-color: #f5f5f5; 
-    padding: 20px; 
-    margin: 150px auto; 
-    max-width: 850px; 
-    border-radius: 10px; 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-  }
+.container {
+  background-color: #fff;
+  padding: 40px;
+  margin: 120px auto;
+  max-width: 850px;
+  border-radius: 20px;
+  border: 4px solid silver;
+  box-shadow: 0 0 35px rgba(255, 165, 0, 0.7);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  font-family: "Georgia", serif;
+}
 
-  .form-row {
-    display: flex;
-    justify-content: space-between;
-    font-size: 22px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-  }
-  </style>
-  
+.container:hover {
+  box-shadow: 0 0 35px rgba(255, 165, 0, 0.9);
+  transform: scale(1.01);
+}
+
+
+.title {
+  text-align: center;
+  font-size: 50px;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  font-family: "Georgia", serif;
+}
+
+.form-row {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 22px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+.access-input {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 30px;
+  padding: 12px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  font-family: inherit;
+}
+
+
+.access-input:focus {
+  outline: none;
+  border-color: #ff7f00;
+  box-shadow: 0 0 8px rgba(255, 165, 0, 0.5);
+}
+
+
+.button-wrapper {
+  text-align: center;
+}
+
+
+.join-button {
+  border-radius: 30px;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #ff7f00;
+  color: #fff;
+  border: none;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.join-button:hover {
+  background-color: #e56f00;
+  transform: scale(1.02);
+}
+</style>

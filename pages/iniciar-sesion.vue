@@ -1,7 +1,12 @@
 <template>
   <div class="login-container">
-    <BackButton to="/" />
-    <h2 class="login-title">Sing in</h2>
+     <div class="header-bar">
+      <div class="logo">
+        <img src="/logo.png" alt="Tasktable Logo" />
+      </div>
+       <h2 class="login-title">Sing in</h2>
+       <BackButton to="/" />
+    </div>
     <form @submit.prevent="login">
       <div class="form-group">
         <label for="email">Email</label>
@@ -78,46 +83,77 @@ const createAccount = () => {
 </script>
 
 <style scoped>
-.close-button {
-  position: absolute;
-  top: 160px;
-  right: 580px;
-  cursor: pointer;
-  font-size: 2em;
-}
+
 .login-title {
   text-align: center;
   font-size: 30px;
   margin-bottom: 20px;
+  font-family: "Georgia", serif;
 }
+
+
 .login-container {
   background-color: #f5f5f5;
   padding: 50px;
   margin: 150px auto;
-  max-width: 640px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border: 4px solid;
-  border-color: silver;
+  max-width: 700px;
+  border-radius: 20px;
+  border: 4px solid silver;
+  box-shadow: 0 0 35px rgba(255, 165, 0, 0.7);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  font-family: "Georgia", serif;
 }
+
+.login-container:hover {
+  box-shadow: 0 0 35px rgba(255, 165, 0, 0.9);
+  transform: scale(1.01);
+}
+
+
+.header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+
+.logo img {
+  height: 50px;
+  width: auto;
+}
+
 
 .form-group {
   margin-bottom: 20px;
 }
 
+
 .form-group label {
   display: block;
   margin-bottom: 5px;
+  font-weight: bold;
 }
+
 
 .form-group input[type="email"],
 .form-group input[type="password"] {
-  width: calc(100%);
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
   box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-family: inherit;
 }
+
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus {
+  outline: none;
+  border-color: #ff7f00;
+  box-shadow: 0 0 8px rgba(255, 165, 0, 0.5);
+}
+
 
 a {
   display: block;
@@ -131,6 +167,7 @@ a:hover {
   text-decoration: underline;
 }
 
+
 .buttons-wrapper {
   margin-top: 50px;
   display: flex;
@@ -141,5 +178,13 @@ a:hover {
 .btn-white {
   flex: 1;
   margin: 0 10px;
+  border-radius: 30px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.btn-black:hover,
+.btn-white:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
 </style>

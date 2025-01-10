@@ -5,6 +5,7 @@
     <form @submit.prevent="createProject">
       <div class="container">
         <h1 class="title">CREATE PROJECT</h1>
+
         <div class="form-row">
           <label for="name">Name</label>
           <input type="text" id="name" v-model="formData.name" required />
@@ -20,12 +21,16 @@
         </div>
 
         <div class="MainButton">
-          <MainButton class="custom-button" type="submit">Create project</MainButton>
+          <MainButton class="custom-button" type="submit">
+            Create project
+          </MainButton>
         </div>
       </div>
     </form>
+   <BottonBar />
   </div>
 </template>
+
 
 <script setup>
 import { ref } from "vue";
@@ -53,7 +58,7 @@ const formData = ref({
 const createProject = async () => {
 
   try{
-    const result = await useFetch('http://localhost:3001/proyecto/crear', {
+    const result = await useFetch('http://localhost:3001/project/', {
     method: 'post',
     body: {
       nombreUsuario: userId,
@@ -73,32 +78,88 @@ const createProject = async () => {
 
 <style scoped>
 
+.container {
+  background-color: #fff;
+  padding: 40px;
+  margin: 120px auto;
+  max-width: 850px;
+  border-radius: 20px;
+  border: 4px solid silver;
+  box-shadow: 0 0 35px rgba(255, 165, 0, 0.7);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  font-family: "Georgia", serif;
+}
+
+
+.container:hover {
+  box-shadow: 0 0 35px rgba(255, 165, 0, 0.9);
+  transform: scale(1.01);
+}
+
+
+.title {
+  text-align: center;
+  font-size: 50px;
+  margin-bottom: 40px;
+  font-family: "Georgia", serif;
+  text-transform: uppercase;
+}
+
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.form-row label {
+  width: 30%;
+}
+
+
+.form-row input[type="text"],
+.form-row textarea {
+  width: 65%;
+  padding: 12px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: normal;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  font-family: inherit;
+}
+
+
+.form-row input[type="text"]:focus,
+.form-row textarea:focus {
+  outline: none;
+  border-color: #ff7f00;
+  box-shadow: 0 0 8px rgba(255, 165, 0, 0.5);
+}
+
 .MainButton {
   margin-top: 30px;
   text-align: center;
 }
 
 
-.title {
-    text-align: center;
-    font-size: 55px;
-    margin-bottom: 40px;
-  }
+.custom-button {
+  border-radius: 30px;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #ff7f00;
+  color: #fff;
+  border: none;
+  transition: background-color 0.3s, transform 0.3s;
+}
 
-.container {
-    background-color: #f5f5f5;
-    padding: 20px; 
-    margin: 150px auto; 
-    max-width: 850px; 
-    border-radius: 10px; 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-  }
-
-  .form-row {
-    display: flex;
-    justify-content: space-between;
-    font-size: 22px;
-    margin-top: 30px;
-  }
-
+.custom-button:hover {
+  background-color: #e56f00;
+  transform: scale(1.02);
+}
 </style>

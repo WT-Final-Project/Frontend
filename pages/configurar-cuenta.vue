@@ -1,6 +1,8 @@
 <template>
   <div>
+    <!-- Cabecera arriba -->
     <Cabecera />
+
     <div class="config-container">
       <!-- Account Information Form -->
       <div class="container">
@@ -8,10 +10,17 @@
           <h2 class="title">CONFIGURE ACCOUNT</h2>
           <div class="form-row">
             <div class="input-group">
-              <label for="user">User name: {{ userId }}</label>
+                 <label for="username">User name:</label>
+                    <input
+                      type="text"
+                      id="username"
+                      v-model="accountData.username"
+                      placeholder="Usuario"
+                      required
+                    />
             </div>
-            <div>
-              <label for="name">Name: </label>
+            <div class="input-group">
+              <label for="name">Name:</label>
               <input
                 type="text"
                 id="name"
@@ -23,7 +32,7 @@
           </div>
           <div class="form-row">
             <div class="input-group">
-              <label for="lastName">Surname: </label>
+              <label for="lastName">Surname:</label>
               <input
                 type="text"
                 id="lastName"
@@ -33,7 +42,9 @@
               />
             </div>
           </div>
-          <button class="submit-button" type="submit">Save Account Info</button>
+          <button class="submit-button" type="submit">
+            Save Account Info
+          </button>
         </form>
       </div>
 
@@ -43,7 +54,7 @@
           <h2 class="title">CHANGE EMAIL</h2>
           <div class="form-row">
             <div class="input-group">
-              <label for="email">New Email: </label>
+              <label for="email">New Email:</label>
               <input
                 type="email"
                 id="email"
@@ -53,7 +64,9 @@
               />
             </div>
           </div>
-          <button class="submit-button" type="submit">Change Email</button>
+          <button class="submit-button" type="submit">
+            Change Email
+          </button>
         </form>
       </div>
 
@@ -63,7 +76,7 @@
           <h2 class="title">CHANGE PASSWORD</h2>
           <div class="form-row">
             <div class="input-group">
-              <label for="password">New Password: </label>
+              <label for="password">New Password:</label>
               <input
                 type="password"
                 id="password"
@@ -72,8 +85,8 @@
                 required
               />
             </div>
-            <div>
-              <label for="confirmPassword">Repeat Password: </label>
+            <div class="input-group">
+              <label for="confirmPassword">Repeat Password:</label>
               <input
                 type="password"
                 id="confirmPassword"
@@ -102,27 +115,34 @@
     <div class="button-container">
       <button class="logout-button" @click="logout">Close session</button>
     </div>
+     <div class="bottom-bar-container">
+      <BottonBar />
+     </div>
   </div>
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, ref, onMounted } from "vue";
 import { useCookieStore } from "~/stores";
+import Cabecera from "~/components/Cabecera.vue"; // si lo necesitas importar
 
 definePageMeta({
   middleware: ["auth"],
 });
 
+// Store y onMounted para limpiar IDs
+const store = useCookieStore();
 onMounted(() => {
   store.setProyId(undefined);
   store.setTareaId(undefined);
 });
 
-const store = useCookieStore();
+// userId (lo usas para mostrar "User name: {{ userId }}")
 const userId = store.userId;
 
-// Split form data into separate refs
+// Split form data en varios refs
 const accountData = ref({
+  username: "",
   name: "",
   lastName: "",
 });
@@ -136,22 +156,22 @@ const passwordData = ref({
   confirmPassword: "",
 });
 
-// Compute if passwords match
+// Computed para comparar contraseñas
 const passwordsMatch = computed(() => {
   return passwordData.value.newPassword === passwordData.value.confirmPassword;
 });
 
-// Form submission handlers
+// Handlers para formularios
 const submitAccountInfo = async () => {
   try {
     const response = await $fetch("http://localhost:3001/user/" + userId, {
       method: "put",
       body: {
+        username: accountData.value.username,
         name: accountData.value.name,
         lastName: accountData.value.lastName,
       },
     });
-
     if (response?.error) {
       console.error(response.error);
     } else {
@@ -165,10 +185,7 @@ const submitAccountInfo = async () => {
 
 const submitEmailChange = async () => {
   try {
-    const { error, success } = await store.changeEmail(
-      emailData.value.newEmail
-    );
-
+    const { error, success } = await store.changeEmail(emailData.value.newEmail);
     if (success) {
       alert("Check your email box to complete the change");
       store.logout();
@@ -187,7 +204,6 @@ const submitPasswordChange = async () => {
       const { error, success } = await store.changePassword(
         passwordData.value.newPassword
       );
-
       if (success) {
         alert("Password changed successfully!");
         store.logout();
@@ -208,65 +224,111 @@ const logout = () => {
 </script>
 
 <style scoped>
-.button-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 40px;
+.page-container {
+  position: relative;
+  min-height: 1200px;
 }
 
-.logout-button {
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 150px;
-  font-size: 15px;
-  background-color: #ff6666;
-  color: white;
+
+.container {
+  background-color: #fff;
+  padding: 30px;
+  margin: 40px auto;
+  max-width: 850px;
+  border-radius: 20px;
+  border: 4px solid silver;
+  box-shadow: 0 0 35px rgba(255, 165, 0, 0.7);
+  transition: box-shadow 0.3s, transform 0.3s;
+  font-family: "Georgia", serif;
+}
+.container:hover {
+  box-shadow: 0 0 35px rgba(255, 165, 0, 0.9);
+  transform: scale(1.01);
 }
 
-.submit-button {
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 200px;
-  font-size: 15px;
-  background-color: #000000;
-  color: white;
-  margin-top: 20px;
-}
 
 .title {
   text-align: center;
-  font-size: 55px;
-  margin-bottom: 40px;
+  font-size: 40px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
 }
-
-.container {
-  background-color: #f5f5f5;
-  padding: 20px;
-  margin: 20px auto;
-  max-width: 850px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 .form-row {
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
-  font-size: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.input-group {
+  margin-right: 20px;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  margin-left: 5px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  font-family: inherit;
+}
+input:focus {
+  outline: none;
+  border-color: #ff7f00;
+  box-shadow: 0 0 8px rgba(255, 165, 0, 0.4);
 }
 
-.input-group {
-  flex: 1;
-  margin-right: 10px;
+.submit-button {
+  padding: 12px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  width: 200px;
+  font-size: 15px;
+  background-color: #000;
+  color: white;
+  margin-top: 20px;
+  transition: background-color 0.3s, transform 0.3s;
 }
+.submit-button:hover {
+  background-color: #333;
+  transform: scale(1.02);
+}
+
 
 .error {
   color: red;
   font-size: 0.8rem;
-  padding-top: 5px;
+  margin-top: 5px;
+}
+
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.logout-button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 15px;
+  background-color: #ff6666;
+  color: white;
+  transition: background-color 0.3s, transform 0.3s;
+}
+.logout-button:hover {
+  background-color: #e05a5a;
+  transform: scale(1.02);
+}
+
+
+.bottom-bar-container {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
 }
 </style>

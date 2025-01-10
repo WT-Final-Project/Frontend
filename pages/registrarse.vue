@@ -1,8 +1,13 @@
 <template>
   <div class="container">
-    <BackButton to="/" />
+     <div class="header-bar">
+      <div class="logo">
+        <img src="/logo.png" alt="Tasktable Logo" />
+      </div>
+       <h2 class ="create-account">Create Account</h2>
+       <BackButton to="/" />
+    </div>
     <form @submit.prevent="register" class="registration-form">
-      <h2>CREATE ACCOUNT</h2>
       <div class="form-row">
         <div class="input-group">
           <input
@@ -122,53 +127,92 @@ const login = () => {
 </script>
 
 <style scoped>
-.close-button {
-  position: fixed;
-  top: 160px;
-  right: 580px;
-  cursor: pointer;
-  font-size: 2em;
+
+.create-account {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 20px;
+  font-family: "Georgia", serif;
 }
+
 .container {
   background-color: #f5f5f5;
   padding: 50px;
   margin: 150px auto;
-  max-width: 640px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border: 4px solid;
-  border-color: silver;
+  max-width: 700px;
+  border-radius: 20px;
+  border: 4px solid silver;
+
+  box-shadow: 0 0 35px rgba(255, 165, 0, 0.7);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
+
+.container:hover {
+  box-shadow: 0 0 35px rgba(255, 165, 0, 0.9);
+  transform: scale(1.01);
+}
+
+.header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+
+.logo img {
+  height: 50px;
+  width: auto;
+}
+
+
+.registration-form h2 {
+  text-align: center;
+  font-size: 2em;
+  font-family: "Georgia", serif;
+  margin-bottom: 30px;
+}
+
 
 .registration-form {
   display: flex;
   flex-direction: column;
+  font-family: "Georgia", serif;
 }
+
 
 .form-row {
   display: flex;
   justify-content: space-between;
+  gap: 10px;
   margin-top: 15px;
 }
 
 .input-group {
   margin-bottom: 10px;
+  flex: 1;
+}
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.form-actions {
-  display: flex;
-  justify-content: space-between;
+.input-group input:focus {
+  outline: none;
+  border-color: #ff7f00;
+  box-shadow: 0 0 8px rgba(255, 165, 0, 0.5);
 }
+
 
 .error {
   color: red;
   font-size: 0.8em;
   margin-top: 5px;
-}
-
-h2 {
-  text-align: center;
-  font-size: 2em;
 }
 
 .buttons-wrapper {
@@ -178,9 +222,16 @@ h2 {
   margin-top: 50px;
 }
 
+
 .btn-black,
 .btn-white {
   flex: 1;
   margin: 0 10px;
+  border-radius: 30px;
+}
+
+.btn-black:hover,
+.btn-white:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
 </style>

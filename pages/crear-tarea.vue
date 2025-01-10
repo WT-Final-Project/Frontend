@@ -76,7 +76,7 @@ const { data: users } = await useFetch(
 
 const submitTask = async () => {
   try {
-    const result = await useFetch("http://localhost:3001/tarea/crear", {
+    const result = await useFetch("http://localhost:3001/task/", {
       method: "post",
       body: {
         idProyecto: proyId,
@@ -88,7 +88,7 @@ const submitTask = async () => {
     });
 
     if (result.data._value != null) {
-      navigateTo("/proyecto");
+      navigateTo("/project");
     } else {
       alert("¡Something went wrong!");
     }

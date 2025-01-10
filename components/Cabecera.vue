@@ -1,3 +1,4 @@
+
 <template>
   <header class="main-header">
     <nav>
@@ -17,13 +18,13 @@
 
 <style scoped>
 .main-header {
-  background-color: #f5f5f5; 
+  background-color: #ff7f00;
   padding: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-  position: sticky; 
-  top: 0; 
-  z-index: 1000; 
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
+
 
 nav ul {
   list-style: none;
@@ -39,12 +40,16 @@ nav li {
 
 nav a {
   text-decoration: none;
-  color: #333; 
+  color: #fff;
   font-weight: bold;
+  font-family: "Georgia", serif;
   transition: color 0.3s ease;
 }
 
 nav a:hover {
-  color: #000; 
+  color: #f2f2f2;
 }
 </style>
+
+
+
