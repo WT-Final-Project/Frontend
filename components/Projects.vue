@@ -3,12 +3,12 @@
     <div class="header">
       <h1>MY PROJECTS</h1>
     </div>
-      <div class="project" v-for="project in projects" :key="project.idproyecto" @click="selectProject(project.idproyecto)">
+      <div class="project" v-for="project in projects" :key="project.projectId" @click="selectProject(project.projectId)">
         <nav>
           
-            <h2>{{ project.nombre }}</h2>
-            <p>{{ project.descripcion }}</p>
-            <span class="role">{{ project.rango }}</span>
+            <h2>{{ project.name }}</h2>
+            <p>{{ project.description }}</p>
+            <span class="role">{{ project.rank }}</span>
           
         </nav>
       </div>
@@ -19,9 +19,9 @@
   import { useCookieStore } from "~/stores";
 
   const store = useCookieStore();
-  const userId = store.userId;
+  const username = store.userId;
 
-  const { data: projects } = await useFetch('http://localhost:3001/participan/proyectosUsuario/'+userId)
+  const { data: projects } = await useFetch('http://localhost:3001/user-projects/'+username)
 
   const selectProject = (projectId) => {
     store.setProyId(projectId.toString());

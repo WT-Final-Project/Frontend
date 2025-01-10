@@ -36,6 +36,7 @@ onMounted(() => {
   box-shadow: 0 0 35px rgba(255, 165, 0, 0.7);
   transition: box-shadow 0.3s ease, transform 0.3s ease;
   font-family: "Georgia", serif;
+}
 
 .container:hover {
   box-shadow: 0 0 35px rgba(255, 165, 0, 0.9);
