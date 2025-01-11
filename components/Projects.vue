@@ -3,13 +3,11 @@
     <div class="header">
       <h1>MY PROJECTS</h1>
     </div>
-      <div class="project" v-for="project in projects" :key="project.projectId" @click="selectProject(project.projectId)">
+      <div class="project" v-for="project in projects" :key="project.projectid" @click="selectProject(project.projectid)">
         <nav>
-          
-            <h2>{{ project.name }}</h2>
-            <p>{{ project.description }}</p>
-            <span class="role">{{ project.rank }}</span>
-          
+            <h2>{{ project.userrole }}</h2>
+            <!--<p>{{ project.description }}</p>
+            <span class="role">{{ project.rank }}</span>-->
         </nav>
       </div>
     </div>
@@ -21,8 +19,8 @@
   const store = useCookieStore();
   const username = store.userId;
 
-  const { data: projects } = await useFetch('http://localhost:3001/user-projects/'+username)
-
+  const { data: projects } = await $fetch('http://localhost:3001/parcipate/user-projects/'+username)
+  console.log(projects)
   const selectProject = (projectId) => {
     store.setProyId(projectId.toString());
     navigateTo('/proyecto')

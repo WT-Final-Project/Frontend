@@ -20,7 +20,7 @@
   const userId = store.userId;
   const proyId = store.proyId;
 
-  const { data: user } = await useFetch('http://localhost:3001/'+userId)
+  const { data: user } = await useFetch('http://localhost:3001/user/'+userId)
 
   const props = defineProps({
     participants: Array
@@ -29,7 +29,7 @@
   const eliminar = async (delUser) => {
     console.log(delUser);
       try {
-        const result = await useFetch('http://localhost:3001/'+proyId+'/'+userId, {
+        const result = await useFetch('http://localhost:3001/user/'+proyId+'/'+userId, {
           method: 'delete',
         });
 

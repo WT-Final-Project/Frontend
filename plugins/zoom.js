@@ -1,4 +1,4 @@
-export default defineNuxtPlugin(() => {
+/*export default defineNuxtPlugin(() => {
   let isZoomed = false;
 
   const toggleZoom = () => {
@@ -28,4 +28,4 @@ export default defineNuxtPlugin(() => {
     },
   };
 });
-
+*/

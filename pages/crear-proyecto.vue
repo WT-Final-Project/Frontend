@@ -61,9 +61,9 @@ const createProject = async () => {
     const result = await useFetch('http://localhost:3001/project/', {
     method: 'post',
     body: {
-      nombreUsuario: userId,
-      nombre:formData.value.name,
-      descripcion:formData.value.description
+      username: userId,
+      name:formData.value.name,
+      description:formData.value.description
     }
   });
   navigateTo("/pantalla-inicio")

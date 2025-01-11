@@ -1,4 +1,3 @@
-// FileUpload.vue
 <template>
   <div 
     class="upload-area"

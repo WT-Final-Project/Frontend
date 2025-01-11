@@ -68,15 +68,15 @@ const file = ref({
 });
 
 const { data: task } = await useFetch(
-  "http://localhost:3001/" + tareaId
+  "http://localhost:3001/task/" + tareaId
 );
 
 const { data: user } = await useFetch(
-  "http://localhost:3001/all" + proyId + "/" + userId
+  "http://localhost:3001/task/all" + proyId + "/" + userId
 );
 
 const { data: fichero } = await useFetch(
-  "http://localhost:3001/" + tareaId
+  "http://localhost:3001/task" + tareaId
 ); //hacer esto aqui podria dar algun problema los vacios
 
 /*watchEffect(async () => {
@@ -90,22 +90,19 @@ const submitTask = async () => {
   if (userId == task._value.nombreusuario) {
     try {
       const result = await useFetch(
-        "http://localhost:3001/complete/" + tareaId,
+        "http://localhost:3001/task/complete/" + tareaId,
         {
           method: "post",
-          body: {
-            idTarea: tareaId,
-          },
         }
       );
 
       if (result.data._value != null) {
         if (hasFile) {
-          const subir = await useFetch("http://localhost:3001/", {
+          const subir = await useFetch("http://localhost:3001/task/", {
             method: "post",
             body: {
-              idTarea: tareaId,
-              nombre: fileData.value.filename,
+              taskid: tareaId,
+              name: fileData.value.filename,
             },
           });
 
