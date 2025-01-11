@@ -43,6 +43,9 @@
             </option>
           </select>
         </div>
+        <div>
+          <FileUpload />
+        </div>
 
         <MainButton class="custom-button" type="submit">Create task</MainButton>
       </div>
