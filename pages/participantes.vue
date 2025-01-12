@@ -2,19 +2,21 @@
   <CabeceraPr />
   <div class="container">
     <h2 class="title">PARTICIPANTS</h2>
-      
-    <ParticipantList :participants="participants"/>
+
+    <ParticipantList :participants="participants" />
   </div>
 </template>
 
 <script setup>
 import { useCookieStore } from "~/stores";
-import { ref, onMounted } from "vue"; 
+import { ref, onMounted } from "vue";
 
 const store = useCookieStore();
-const proyId = store.proyId
+const proyId = store.proyId;
 
-const { data: participants } = await useFetch('http://localhost:3001/all/'+proyId)
+const { data: participants } = await $fetch(
+  "http://localhost:3001/participate/all/" + proyId
+);
 
 definePageMeta({
   middleware: ["auth"],
@@ -36,7 +38,6 @@ onMounted(() => {
   font-family: "Georgia", serif;
 }
 
-
 .container {
   background-color: #fff;
   padding: 40px;
@@ -53,7 +54,6 @@ onMounted(() => {
   box-shadow: 0 0 25px rgba(255, 165, 0, 0.6);
   transform: scale(1.01);
 }
-
 
 .container-participante {
   display: flex;
@@ -76,13 +76,11 @@ onMounted(() => {
   transform: scale(1.01);
 }
 
-
 .participant-info {
   flex-grow: 1;
   font-size: 18px;
   color: #333;
 }
-
 
 .delete-box {
   width: 35px;
@@ -107,5 +105,4 @@ onMounted(() => {
   font-size: 30px;
   cursor: pointer;
 }
-
 </style>

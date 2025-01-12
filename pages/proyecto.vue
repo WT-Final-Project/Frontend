@@ -1,67 +1,70 @@
 <template>
-    <div>
-      <CabeceraPr />
-        <NuxtLink v-if="userrank === 'leader'" to="/modificar-proyecto">
-            <img class="settings" src="/conf.png" alt="Settings" />
+  <div>
+    <CabeceraPr />
+    <NuxtLink v-if="userRango === 'lider'" to="/modificar-proyecto">
+      <img class="settings" src="/conf.png" alt="Settings" />
+    </NuxtLink>
+    <div class="container">
+      <BackButton :to="'/pantalla-inicio'" />
+
+      <h1 class="title">{{ project.name }}</h1>
+      <p class="desc">{{ project.description }}</p>
+      <div v-if="userRango === 'lider'">
+        <NuxtLink to="/crear-tarea">
+          <MainButton class="custom-button">ADD TASK</MainButton>
         </NuxtLink>
-      <div class="container">
-        <BackButton :to="'/pantalla-inicio'" />
-
-        <h1 class ="title"> {{ project.name }}</h1>
-        <p class=" desc">{{project.description}}</p>
-        <div v-if="userrank === 'leader'">
-          <NuxtLink to="/crear-tarea">
-            <MainButton class="custom-button">ADD TASK</MainButton>
-          </NuxtLink>
-        </div>
-        
-        <div v-if="userrank === 'leader'">
-        <h2>Project task:</h2>
-        </div>
-        <div v-if="userrank === 'participante'">
-        <h2>Pending project tasks:</h2>
-        </div>
-
-        <TaskList :tasks="tasksAll" v-if="userrank === 'leader'"/>
-        <TaskList :tasks="tasks" v-else/>
       </div>
-  
-      
+
+      <div v-if="userRango === 'lider'">
+        <h2>Project task:</h2>
+      </div>
+      <div v-if="userRango === 'participante'">
+        <h2>Pending project tasks:</h2>
+      </div>
+
+      <TaskList :tasks="tasksAll" v-if="userRango === 'lider'" />
+      <TaskList :tasks="tasks" v-else />
     </div>
-  </template>
-  
-  <script setup>
-  import { ref } from "vue";
-  import { useCookieStore } from "~/stores";
+  </div>
+</template>
 
-  definePageMeta({
-    middleware: ["auth"],
-  });
+<script setup>
+import { ref } from "vue";
+import { useCookieStore } from "~/stores";
 
-  onMounted(() => {
+definePageMeta({
+  middleware: ["auth"],
+});
+
+onMounted(() => {
   store.setTareaId(undefined);
 });
 
-  const store = useCookieStore();
-  const route = useRoute();
-  const proyId = store.proyId;
-  const userId = store.userId;
-  
+const store = useCookieStore();
+const route = useRoute();
+const proyId = store.proyId;
+const userId = store.userId;
 
-  const { data: project } = await useFetch('http://localhost:3001/project/'+proyId);
+const { data: project } = await $fetch(
+  "http://localhost:3001/project/" + proyId
+);
 
-  const { data: tasks } = await useFetch('http://localhost:3001/task/uncompleted/'+proyId);
-  
-  const { data: tasksAll } = await useFetch('http://localhost:3001/task/all/'+proyId);
+const { data: tasks } = await $fetch(
+  "http://localhost:3001/task/uncompleted/" + proyId
+);
 
-  const { data: userRoleResponse } = await useFetch('http://localhost:3001/task/all/'+proyId+'/'+userId);
+const { data: tasksAll } = await $fetch(
+  "http://localhost:3001/task/all/" + proyId
+);
 
-  const userRango = ref(userRoleResponse._value.rank);
+const { data: userRoleResponse } = await $fetch(
+  "http://localhost:3001/task/all/" + proyId + "/" + userId
+);
 
+const userRango = ref(userRoleResponse.rank);
 </script>
-  
-<style scoped>
 
+<style scoped>
 .title {
   text-align: center;
   font-size: 55px;
@@ -95,7 +98,6 @@
   transform: scale(1.05);
 }
 
-
 .container {
   background-color: #fff;
   padding: 40px;
@@ -112,6 +114,4 @@
   box-shadow: 0 0 25px rgba(255, 165, 0, 0.6);
   transform: scale(1.01);
 }
-
-  </style>
-  
+</style>
