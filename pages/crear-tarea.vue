@@ -74,7 +74,7 @@ const dataForm = ref({
 });
 
 const { data: users } = await useFetch(
-  "http://localhost:3001/all/" + proyId
+  "http://localhost:3001/participate/all/" + proyId
 );
 
 const submitTask = async () => {

@@ -4,7 +4,7 @@
       <BackButton :to="'/proyecto'" />
     </div>
     <div class="task-form">
-      <h1 class="title">{{ task.title }}</h1>
+      <h1 class="title">{{ task.tasktitle }}</h1>
       <div class="container2">
         <div class="form-group">
           <label class="negrita">Description:</label>
@@ -16,7 +16,7 @@
           <p>{{ task.duedate }}</p>
         </div>
 
-        <div class="form-group" v-if="user.rank === 'lider'">
+        <div class="form-group" v-if="user.rank === 'leader'">
           <label class="negrita">State:</label>
           <p>{{ task.completed === 1 ? "Completada" : "Pendiente" }}</p>
         </div>
@@ -24,7 +24,7 @@
 
       <div
         class="form-group"
-        v-if="user.rank === 'lider' && task.completed === 1"
+        v-if="user.rank === 'leader' && task.completed === 1"
       >
         <label class="negrita">Archives:</label>
         <p>{{ fichero.name }}</p>
@@ -72,11 +72,11 @@ const { data: task } = await useFetch(
 );
 
 const { data: user } = await useFetch(
-  "http://localhost:3001/task/all" + proyId + "/" + userId
+  "http://localhost:3001/task/all/" + proyId + "/" + userId
 );
 
 const { data: fichero } = await useFetch(
-  "http://localhost:3001/task" + tareaId
+  "http://localhost:3001/task/" + tareaId
 ); //hacer esto aqui podria dar algun problema los vacios
 
 /*watchEffect(async () => {
@@ -98,7 +98,7 @@ const submitTask = async () => {
 
       if (result.data._value != null) {
         if (hasFile) {
-          const subir = await useFetch("http://localhost:3001/task/", {
+          const subir = await useFetch("http://localhost:3001/task", {
             method: "post",
             body: {
               taskid: tareaId,

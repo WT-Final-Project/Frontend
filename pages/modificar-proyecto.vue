@@ -54,7 +54,7 @@ const formData = ref({
 const modifyProject = async () => {
   try {
     const result = await useFetch(
-      "http://localhost:3001/" + proyId,
+      "http://localhost:3001/project/" + proyId,
       {
         method: "post",
         body: {
@@ -78,7 +78,7 @@ const modifyProject = async () => {
 const eliminar = async () => {
   try {
     const result = await useFetch(
-      "http://localhost:3001/" + proyId,
+      "http://localhost:3001/project/" + proyId,
       {
         method: "delete",
       }

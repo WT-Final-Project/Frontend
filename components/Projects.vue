@@ -6,8 +6,8 @@
       <div class="project" v-for="project in projects" :key="project.projectid" @click="selectProject(project.projectid)">
         <nav>
             <h2>{{ project.userrole }}</h2>
-            <!--<p>{{ project.description }}</p>
-            <span class="role">{{ project.rank }}</span>-->
+            <p>{{ project.description }}</p>
+            <span class="role">{{ project.rank }}</span>
         </nav>
       </div>
     </div>
@@ -18,8 +18,7 @@
 
   const store = useCookieStore();
   const username = store.userId;
-
-  const { data: projects } = await $fetch('http://localhost:3001/parcipate/user-projects/'+username)
+  const { data: projects } = await $fetch('http://localhost:3001/participate/user-projects/'+username)
   console.log(projects)
   const selectProject = (projectId) => {
     store.setProyId(projectId.toString());

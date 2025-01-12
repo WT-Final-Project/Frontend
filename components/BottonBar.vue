@@ -1,44 +1,51 @@
 <template>
-  <div class="bottom-right-bar">
-     <ul>
-       <li><NuxtLink to="/aboutUs">About Us</NuxtLink></li>
-       <li><NuxtLink to="/contactUs">Contact US</NuxtLink></li>
-     </ul>
+  <div class="botton-bar">
+    <nuxt-link to="/aboutUs" class="button">About Us</nuxt-link>
+    <nuxt-link to="/contactUs" class="button">Contact Us</nuxt-link>
   </div>
 </template>
 
 <script setup>
-
+// Este script es opcional, pero aquí podrías añadir lógica adicional si la necesitas
 </script>
 
 <style scoped>
-
-.bottom-right-bar {
+.botton-bar {
   position: fixed;
   bottom: 20px;
   right: 20px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   gap: 10px;
   padding: 10px 15px;
-  background-color: #f5f5f5;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-  z-index: 9999;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1000;
 }
 
+.botton-bar:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
 
-button {
-  border: 2px solid #ccc;
-  background-color: #fff;
-  color: #000;
-  border-radius: 30px;
-  padding: 8px 16px;
+.button {
+  background-color: #007bff;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-size: 14px;
   font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-button:hover {
-  background-color: #eee;
+.button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.button:active {
+  transform: scale(0.95);
 }
 </style>

@@ -52,7 +52,7 @@
   const joinProject = async () => {
     try {
       
-      const result = await useFetch('http://localhost:3001/', {
+      const result = await useFetch('http://localhost:3001/project', {
         method: 'post',
         body: {
           idProyecto: dataForm.value.accessCode,

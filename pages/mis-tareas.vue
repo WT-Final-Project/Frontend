@@ -22,7 +22,7 @@
   const userId = store.userId
   const proyId = store.proyId
   
-  const { data: tasks } = await useFetch('http://localhost:3001/uncompleted/'+proyId+'/'+userId);
+  const { data: tasks } = await useFetch('http://localhost:3001/task/uncompleted/'+proyId+'/'+userId);
   </script>
   
   <style scoped>
