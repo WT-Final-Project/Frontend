@@ -10,7 +10,7 @@
         </div>
         <div class="form-group">
           <label for="taskName">Task name</label>
-          <input type="text" id="taskName" v-model="dataForm.name" required />
+          <input type="text" id="taskName" v-model="dataForm.title" required />
         </div>
 
         <div class="form-group">
@@ -28,7 +28,7 @@
           <input
             type="date"
             id="fechavencimineto"
-            v-model="dataForm.due"
+            v-model="dataForm.duedate"
             required
           />
         </div>
@@ -36,8 +36,12 @@
         <div class="form-group">
           <label for="nombreusuario">Assign to</label>
           <select id="nombreusuario" v-model="dataForm.username" required>
-            <option v-for="user in users" :value="user.username">
-              {{ user.name }}
+                   <option
+              v-for="user in users?.data"
+              :key="user.username"
+              :value="user.username"
+            >
+              {{ user.username }}
             </option>
           </select>
         </div>
@@ -65,29 +69,36 @@ const store = useCookieStore();
 const proyId = store.proyId;
 
 const dataForm = ref({
-  nombre: "",
-  descripcion: "",
-  nombreUsuario: "",
-  fechavencimineto: "",
+  title: "",
+  description: "",
+  username: "",
+  duedate: "",
 });
 
 const { data: users } = await useFetch("http://localhost:3001/participate/all/" + proyId);
 
 const submitTask = async () => {
+    console.log({
+    projectid: proyId,
+    username: dataForm.value.username,
+    tasktitle: dataForm.value.title,
+    description: dataForm.value.description,
+    duedate: dataForm.value.duedate,
+  });
   try {
-    const result = await useFetch("http://localhost:3001/task/", {
+    const result = await $fetch("http://localhost:3001/task/", {
       method: "post",
       body: {
-        idProyecto: proyId,
-        nombreUsuario: dataForm.value.nombreUsuario,
-        titulo: dataForm.value.nombre,
-        descripcion: dataForm.value.descripcion,
-        fechaVencimiento: dataForm.value.fechavencimineto,
+       projectId: proyId,
+        username: dataForm.value.username,
+        title: dataForm.value.title,
+        description: dataForm.value.description,
+        dueDate: dataForm.value.duedate,
       },
     });
 
-    if (result.data._value != null) {
-      navigateTo("/project");
+    if (result) {
+      navigateTo("/proyecto");
     } else {
       alert("¡Something went wrong!");
     }
@@ -99,8 +110,6 @@ const submitTask = async () => {
 </script>
 
 <style scoped>
-/* 1) Importamos la fuente Poppins (opcional, si prefieres otra fuente simplemente cámbiala) */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
 /* 2) Contenedor principal de toda la vista */
 .create-task {

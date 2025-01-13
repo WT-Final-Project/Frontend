@@ -52,11 +52,11 @@
   const joinProject = async () => {
     try {
       
-      const result = await useFetch('http://localhost:3001/project', {
+      const result = await useFetch('http://localhost:3001/participate', {
         method: 'post',
         body: {
-          idProyecto: dataForm.value.accessCode,
-          nombreUsuario: userId
+          projectId: dataForm.value.accessCode,
+          username: userId
         }
       });
       console.log(result);

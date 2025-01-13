@@ -87,7 +87,7 @@ const { data: fichero } = await useFetch(
 });*/
 
 const submitTask = async () => {
-  if (userId == task._value.nombreusuario) {
+  if (userId == task._value.username) {
     try {
       const result = await useFetch(
         "http://localhost:3001/task/complete/" + tareaId,
@@ -98,7 +98,7 @@ const submitTask = async () => {
 
       if (result.data._value != null) {
         if (hasFile) {
-          const subir = await useFetch("http://localhost:3001/task", {
+          const subir = await useFetch("http://localhost:3001/task/", {
             method: "post",
             body: {
               taskid: tareaId,

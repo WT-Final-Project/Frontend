@@ -4,9 +4,9 @@
           <li v-for="task in tasks" :key="task.id" class="task">
             <div class="container">
               <div @click="() => goToTaskDetails(task.id)">
-                <strong>{{ task.titulo }}</strong>
+                <strong>{{ task.tasktitle }}</strong>
                 <p>Assigned to: {{ task.username }}</p>
-                <p>Due date: {{ task.due }}</p>
+                <p>Due date: {{ task.duedate }}</p>
               </div>
             </div>
           </li>

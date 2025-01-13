@@ -58,8 +58,8 @@ const modifyProject = async () => {
       {
         method: "post",
         body: {
-          nombre: formData.value.name,
-          descripcion: formData.value.description,
+          name: formData.value.name,
+          description: formData.value.description,
         },
       }
     );
