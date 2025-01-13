@@ -3,6 +3,7 @@
     <section class="hero">
       <div class="hero-content">
         <h1>Accelerating Your Success</h1>
+        <BackButton to="/pantalla-inicio" />
         <p>
           At <strong>Efficient Manager</strong>, we empower businesses to streamline project management, delivering exceptional results in record time.
         </p>
@@ -56,7 +57,7 @@ const learnMore = () => {
 };
 
 const contactUs = () => {
-  window.location.href = "/contact-us";
+  window.location.href = "/contactUs";
 };
 </script>
 
@@ -69,13 +70,16 @@ const contactUs = () => {
 
 .hero {
   background: url('/public/fondo2.jpg') no-repeat center center/cover;
-  height: 100vh;
+  height: 75vh;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #fff;
   text-align: center;
+  margin-bottom: 10px; /* Reducir la separación debajo de la sección */
 }
+
+
 
 .hero-content {
   background: rgba(0, 0, 0, 0.6);
@@ -98,10 +102,12 @@ const contactUs = () => {
   background-color: #e55500;
 }
 
+
 .values {
-  padding: 50px 20px;
+  padding: 30px 20px; /* Reducir el padding superior/inferior */
   background-color: #f5f5f5;
   text-align: center;
+  margin-top: 0; /* Eliminar el margen superior si existe */
 }
 
 .value-cards {

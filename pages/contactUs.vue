@@ -1,6 +1,7 @@
 <template>
   <div class="contact-us">
     <section class="hero">
+      <BackButton to="/pantalla-inicio" />
       <h1>Contact Us</h1>
       <p>
         We're here to help. Reach out to us and let's build efficient solutions together.
@@ -38,19 +39,19 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
+import { reactive } from "vue";
 
 const form = reactive({
-  name: '',
-  email: '',
-  message: '',
+  name: "",
+  email: "",
+  message: "",
 });
 
 const handleSubmit = () => {
   alert(`Thank you, ${form.name}. Your message has been sent!`);
-  form.name = '';
-  form.email = '';
-  form.message = '';
+  form.name = "";
+  form.email = "";
+  form.message = "";
 };
 </script>
 
@@ -61,7 +62,7 @@ const handleSubmit = () => {
 }
 
 .hero {
-  background: url('/public/fondo2.jpg') no-repeat center center/cover;
+  background: url("/public/fondo2.jpg") no-repeat center center/cover;
   height: 50vh;
   display: flex;
   flex-direction: column;
@@ -98,7 +99,7 @@ const handleSubmit = () => {
 }
 
 .contact-info a {
-  color: #007bff;
+  color: #ff6600; /* Naranja */
   text-decoration: none;
 }
 
@@ -114,6 +115,7 @@ const handleSubmit = () => {
 .contact-form h2 {
   font-size: 2em;
   margin-bottom: 20px;
+  color: #333; /* Más contraste */
 }
 
 .form-group {
@@ -124,22 +126,27 @@ const handleSubmit = () => {
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
+  color: #333; /* Más contraste */
 }
 
 .form-group input,
 .form-group textarea {
-  width: 100%;
+  width: 80%; /* Reducir el ancho */
+  max-width: 500px;
+  margin: 0 auto;
+  display: block;
   padding: 10px;
   font-size: 1em;
   border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: #f9f9f9;
 }
 
 button {
   padding: 10px 20px;
   font-size: 1em;
   color: #fff;
-  background-color: #007bff;
+  background-color: #ff6600; /* Cambiar a naranja */
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -147,6 +154,6 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #e55500; /* Un naranja más oscuro */
 }
 </style>

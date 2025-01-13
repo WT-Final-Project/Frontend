@@ -1,28 +1,27 @@
 <template>
   <div>
     <CabeceraPr />
-    <NuxtLink v-if="userRango === 'lider'" to="/modificar-proyecto">
-      <img class="settings" src="/conf.png" alt="Settings" />
-    </NuxtLink>
     <div class="container">
       <BackButton :to="'/pantalla-inicio'" />
-
-      <h1 class="title">{{ project.name }}</h1>
+       <NuxtLink v-if=" userRoleResponse.userrole === 'leader'" to="/modificar-proyecto">
+      <img class="settings" src="/conf.png" alt="Settings" />
+    </NuxtLink>
+      <h1 class="title">{{ project.projectname }}</h1>
       <p class="desc">{{ project.description }}</p>
-      <div v-if="userRango === 'lider'">
+      <div v-if="userRoleResponse.userrole === 'leader'">
         <NuxtLink to="/crear-tarea">
           <MainButton class="custom-button">ADD TASK</MainButton>
         </NuxtLink>
       </div>
 
-      <div v-if="userRango === 'lider'">
+      <div v-if="userRoleResponse.userrole === 'leader'">
         <h2>Project task:</h2>
       </div>
-      <div v-if="userRango === 'participante'">
+      <div v-if="userRoleResponse.userrole === 'participant'">
         <h2>Pending project tasks:</h2>
       </div>
 
-      <TaskList :tasks="tasksAll" v-if="userRango === 'lider'" />
+      <TaskList :tasks="tasksAll" v-if="userRoleResponse.userrole === 'leader'" />
       <TaskList :tasks="tasks" v-else />
     </div>
   </div>
@@ -58,10 +57,10 @@ const { data: tasksAll } = await $fetch(
 );
 
 const { data: userRoleResponse } = await $fetch(
-  "http://localhost:3001/task/all/" + proyId + "/" + userId
+  "http://localhost:3001/participate/rank/" + proyId + "/" + userId
 );
 
-const userRango = ref(userRoleResponse.rank);
+const userrole = ref(userRoleResponse);
 </script>
 
 <style scoped>
@@ -82,23 +81,26 @@ const userRango = ref(userRoleResponse.rank);
   font-family: "Georgia", serif;
 }
 
+/* Ajusta la posición del ícono en la esquina superior derecha */
 .settings {
-  position: fixed;
-  z-index: 9999;
+  position: absolute; /* O relative, dependiendo de cómo esté definida tu cabecera */
+  top: 20px;
+  right: 20px;
   width: 50px;
   height: 50px;
   cursor: pointer;
   background: transparent;
-  top: 20px;
-  right: 20px;
   transition: box-shadow 0.3s, transform 0.3s;
 }
+
 .settings:hover {
   box-shadow: 0 0 10px rgba(255, 165, 0, 0.4);
   transform: scale(1.05);
 }
 
+
 .container {
+  position: relative;
   background-color: #fff;
   padding: 40px;
   margin: 50px auto;

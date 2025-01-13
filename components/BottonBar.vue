@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-// Este script es opcional, pero aquí podrías añadir lógica adicional si la necesitas
+
 </script>
 
 <style scoped>
@@ -30,7 +30,7 @@
 }
 
 .button {
-  background-color: #007bff;
+  background-color: #ff7f00;
   color: #ffffff;
   text-decoration: none;
   padding: 10px 15px;
@@ -41,7 +41,7 @@
 }
 
 .button:hover {
-  background-color: #0056b3;
+  background-color: #ff7f00;
   transform: scale(1.05);
 }
 

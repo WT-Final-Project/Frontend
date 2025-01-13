@@ -34,17 +34,26 @@
   background-color: #e6e6e6;
 }
 
+
+/* Ejemplo de un botón moderno con un degradado y efecto hover */
 .custom-button {
-  font-size: 20px; 
-  padding: auto; 
+  background: linear-gradient(135deg, #ff7e5f, #feb47b); /* degradado naranja */
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-family: "Georgia", serif;
+  border-radius: 30px;
   cursor: pointer;
-  background-color: silver;
-  cursor: pointer;
-  transition: background-color 0.3s ease; 
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin-top: 10px; /* Ajusta si necesitas más o menos separación */
 }
+
 .custom-button:hover {
-  background-color: lightgray; 
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(255, 165, 0, 0.3);
 }
+
 
 html, body {
   height: 100%;
