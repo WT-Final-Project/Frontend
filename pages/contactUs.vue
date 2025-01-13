@@ -1,7 +1,10 @@
 <template>
   <div class="contact-us">
     <section class="hero">
-      <BackButton to="/pantalla-inicio" />
+      <div class="back-button-circle">
+        <BackButton to="/pantalla-inicio" />
+      </div>
+
       <h1>Contact Us</h1>
       <p>
         We're here to help. Reach out to us and let's build efficient solutions together.
@@ -38,6 +41,7 @@
   </div>
 </template>
 
+
 <script setup>
 import { reactive } from "vue";
 
@@ -61,7 +65,9 @@ const handleSubmit = () => {
   color: #333;
 }
 
+
 .hero {
+  position: relative;
   background: url("/public/fondo2.jpg") no-repeat center center/cover;
   height: 50vh;
   display: flex;
@@ -70,7 +76,40 @@ const handleSubmit = () => {
   align-items: center;
   text-align: center;
   color: #fff;
+  overflow: hidden;
 }
+
+
+.back-button-circle {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  z-index: 999;
+}
+
+.back-button-circle:hover {
+  background-color: #f0f0f0;
+}
+
+.back-button-circle a,
+.back-button-circle button {
+  color: #333;
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+
 
 .hero h1 {
   font-size: 3em;
@@ -81,6 +120,7 @@ const handleSubmit = () => {
   font-size: 1.5em;
   max-width: 600px;
 }
+
 
 .contact-info {
   background-color: #f5f5f5;
@@ -99,7 +139,7 @@ const handleSubmit = () => {
 }
 
 .contact-info a {
-  color: #ff6600; /* Naranja */
+  color: #ff6600;
   text-decoration: none;
 }
 
@@ -110,13 +150,15 @@ const handleSubmit = () => {
 .contact-form {
   padding: 30px;
   text-align: center;
+  color: #fff;
 }
 
 .contact-form h2 {
   font-size: 2em;
   margin-bottom: 20px;
-  color: #333; /* Más contraste */
+  color: inherit;
 }
+
 
 .form-group {
   margin-bottom: 15px;
@@ -124,14 +166,15 @@ const handleSubmit = () => {
 
 .form-group label {
   display: block;
-  font-weight: bold;
+  font-weight: 700;
   margin-bottom: 5px;
-  color: #333; /* Más contraste */
+  font-size: 1.1em;
+  color: #fff;
 }
 
 .form-group input,
 .form-group textarea {
-  width: 80%; /* Reducir el ancho */
+  width: 80%;
   max-width: 500px;
   margin: 0 auto;
   display: block;
@@ -140,13 +183,14 @@ const handleSubmit = () => {
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f9f9f9;
+  color: #111;
 }
 
 button {
   padding: 10px 20px;
   font-size: 1em;
   color: #fff;
-  background-color: #ff6600; /* Cambiar a naranja */
+  background-color: #ff6600;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -154,6 +198,6 @@ button {
 }
 
 button:hover {
-  background-color: #e55500; /* Un naranja más oscuro */
+  background-color: #e55500;
 }
 </style>

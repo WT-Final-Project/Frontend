@@ -38,12 +38,14 @@
         </div>
       </div>
     </main>
+    <BottonBar />
   </div>
 </template>
 
 
 <script setup>
 import { useCookieStore } from "~/stores";
+import BottonBar from "~/components/BottonBar.vue";
 
 const store = useCookieStore();
 

@@ -1,10 +1,7 @@
 <template>
   <div>
-    <!-- Cabecera arriba -->
     <Cabecera />
-
     <div class="config-container">
-      <!-- Account Information Form -->
       <div class="container">
         <form @submit.prevent="submitAccountInfo">
           <h2 class="title">CONFIGURE ACCOUNT</h2>
@@ -48,7 +45,6 @@
         </form>
       </div>
 
-      <!-- Email Change Form -->
       <div class="container">
         <form @submit.prevent="submitEmailChange">
           <h2 class="title">CHANGE EMAIL</h2>
@@ -70,7 +66,6 @@
         </form>
       </div>
 
-      <!-- Password Change Form -->
       <div class="container">
         <form @submit.prevent="submitPasswordChange">
           <h2 class="title">CHANGE PASSWORD</h2>
@@ -124,23 +119,20 @@
 <script setup>
 import { computed, ref, onMounted } from "vue";
 import { useCookieStore } from "~/stores";
-import Cabecera from "~/components/Cabecera.vue"; // si lo necesitas importar
+import Cabecera from "~/components/Cabecera.vue";
 
 definePageMeta({
   middleware: ["auth"],
 });
 
-// Store y onMounted para limpiar IDs
 const store = useCookieStore();
 onMounted(() => {
   store.setProyId(undefined);
   store.setTareaId(undefined);
 });
 
-// userId (lo usas para mostrar "User name: {{ userId }}")
 const userId = store.userId;
 
-// Split form data en varios refs
 const accountData = ref({
   username: "",
   name: "",
@@ -156,12 +148,10 @@ const passwordData = ref({
   confirmPassword: "",
 });
 
-// Computed para comparar contraseñas
 const passwordsMatch = computed(() => {
   return passwordData.value.newPassword === passwordData.value.confirmPassword;
 });
 
-// Handlers para formularios
 const submitAccountInfo = async () => {
   try {
     const response = await $fetch("http://localhost:3001/user/" + userId, {
@@ -217,7 +207,6 @@ const submitPasswordChange = async () => {
   }
 };
 
-// Logout handler
 const logout = () => {
   store.logout();
 };

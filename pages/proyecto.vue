@@ -81,9 +81,8 @@ const userrole = ref(userRoleResponse);
   font-family: "Georgia", serif;
 }
 
-/* Ajusta la posición del ícono en la esquina superior derecha */
 .settings {
-  position: absolute; /* O relative, dependiendo de cómo esté definida tu cabecera */
+  position: absolute;
   top: 20px;
   right: 20px;
   width: 50px;

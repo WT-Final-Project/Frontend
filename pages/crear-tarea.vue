@@ -49,7 +49,6 @@
           <fileUpload />
         </div>
 
-        <!-- Botón principal -->
         <MainButton class="custom-button" type="submit">Create task</MainButton>
       </div>
     </form>
@@ -75,7 +74,7 @@ const dataForm = ref({
   duedate: "",
 });
 
-const { data: users } = await useFetch("http://localhost:3001/participate/all/" + proyId);
+const { data: users } = await $fetch("http://localhost:3001/participate/all/" + proyId);
 
 const submitTask = async () => {
     console.log({
@@ -111,13 +110,11 @@ const submitTask = async () => {
 
 <style scoped>
 
-/* 2) Contenedor principal de toda la vista */
 .create-task {
   font-family: "Poppins", sans-serif;
   color: #333;
 }
 
-/* 3) Botón de retorno */
 .close-button {
   position: absolute;
   cursor: pointer;
@@ -127,7 +124,6 @@ const submitTask = async () => {
   color: #555;
 }
 
-/* 4) Contenedor general del formulario */
 .container {
   background-color: #fff;
   padding: 40px;
@@ -140,13 +136,11 @@ const submitTask = async () => {
   transition: box-shadow 0.3s, transform 0.3s;
 }
 
-/* Efecto hover */
 .container:hover {
   box-shadow: 0 0 28px rgba(255, 165, 0, 0.5);
   transform: scale(1.01);
 }
 
-/* 5) Encabezado del formulario */
 .create-task-header {
   display: flex;
   justify-content: center;
@@ -159,7 +153,6 @@ const submitTask = async () => {
   letter-spacing: 2px;
 }
 
-/* 6) Grupos de formulario */
 .form-group {
   margin-bottom: 20px;
 }
@@ -170,7 +163,7 @@ const submitTask = async () => {
   margin-bottom: 8px;
 }
 
-/* 7) Campos de texto, fecha y select */
+
 input[type="text"],
 input[type="date"],
 select,
@@ -191,13 +184,12 @@ select:focus,
 input[type="descripcion"]:focus {
   outline: none;
   box-shadow: 0 0 8px rgba(255, 165, 0, 0.3);
-  background-color: #fffaf0; /* Pequeño cambio de color al focus */
+  background-color: #fffaf0;
 }
 
-/* 8) Estilo del botón principal */
 .custom-button {
   display: inline-block;
-  background: linear-gradient(135deg, #ff7e5f, #feb47b); /* degradado naranja */
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
   color: #fff;
   border: none;
   border-radius: 25px;

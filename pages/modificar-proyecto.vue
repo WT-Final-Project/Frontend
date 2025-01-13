@@ -53,10 +53,10 @@ const formData = ref({
 
 const modifyProject = async () => {
   try {
-    const result = await useFetch(
+    const result = await $fetch(
       "http://localhost:3001/project/" + proyId,
       {
-        method: "post",
+        method: "put",
         body: {
           name: formData.value.name,
           description: formData.value.description,
@@ -64,10 +64,10 @@ const modifyProject = async () => {
       }
     );
 
-    if (result.data._value != null) {
-      navigateTo("/proyecto");
-    } else {
+    if (result?.error) {
       alert("¡An error has occurred!");
+    } else {
+       navigateTo("/proyecto");
     }
   } catch (error) {
     console.error(error);
@@ -77,18 +77,18 @@ const modifyProject = async () => {
 
 const eliminar = async () => {
   try {
-    const result = await useFetch(
+    const result = await $fetch(
       "http://localhost:3001/project/" + proyId,
       {
         method: "delete",
       }
     );
 
-    if (result.data._value != null) {
+    if (result?.error) {
+      alert("¡Something went wrong!");
+    } else {
       store.setProyId(undefined);
       navigateTo("/pantalla-inicio");
-    } else {
-      alert("¡Something went wrong!");
     }
   } catch (error) {
     console.error(error);

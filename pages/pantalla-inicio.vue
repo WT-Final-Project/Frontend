@@ -9,20 +9,29 @@
 </template>
 
 <script setup>
-import { useCookieStore } from "~/stores";
-import BottonBar from "~/components/BottonBar.vue";
+import { onMounted } from 'vue'
+import { useNuxtApp } from '#app'
+import { useCookieStore } from '~/stores'
+import BottonBar from '~/components/BottonBar.vue'
 
-const store = useCookieStore();
+const store = useCookieStore()
 
 definePageMeta({
   middleware: ["auth"],
-});
+})
 
 onMounted(() => {
-  store.setProyId(undefined); 
-  store.setTareaId(undefined);
-});
+  store.setProyId(undefined)
+  store.setTareaId(undefined)
+})
+
+const { $toggleZoom } = useNuxtApp()
+
+function zoomToggle() {
+  $toggleZoom()
+}
 </script>
+
 
 <style scoped>
 

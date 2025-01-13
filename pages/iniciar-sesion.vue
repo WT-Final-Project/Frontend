@@ -1,12 +1,22 @@
 <template>
   <div class="login-container">
-     <div class="header-bar">
+    <div class="header-bar">
       <div class="logo">
         <img src="/logo.png" alt="Tasktable Logo" />
       </div>
-       <h2 class="login-title">Sing in</h2>
-       <BackButton to="/" />
+      <h2 class="login-title">Sign in</h2>
+      <BackButton to="/" />
     </div>
+
+    <transition name="slide-up">
+      <div
+        v-if="showError"
+        class="error-container"
+      >
+        {{ errorMessage }}
+      </div>
+    </transition>
+
     <form @submit.prevent="login">
       <div class="form-group">
         <label for="email">Email</label>
@@ -17,23 +27,24 @@
         <input type="password" id="password" v-model="password" required />
       </div>
       <div class="buttons-wrapper">
-        <main-button class="btn-white" @click="createAccount"
-          >CREATE ACCOUNT</main-button
-        >
+        <main-button class="btn-white" @click="createAccount">CREATE ACCOUNT</main-button>
         <main-button class="btn-black" type="submit">SIGN IN</main-button>
       </div>
     </form>
   </div>
 </template>
 
+
 <script setup>
-import { errorMessages } from "vue/compiler-sfc";
+import { ref, onMounted } from "vue";
 import { useCookieStore } from "~/stores";
 
 const store = useCookieStore();
 
 const email = ref("");
 const password = ref("");
+const showError = ref(false);
+const errorMessage = ref("");
 
 onMounted(() => {
   store.setProyId(undefined);
@@ -42,38 +53,22 @@ onMounted(() => {
 });
 
 const login = async () => {
-  // try {
-  //   const { data, error } = await $fetch("http://localhost:3001/user/signin", {
-  //     method: "post",
-  //     body: {
-  //       email: email.value,
-  //       password: password.value,
-  //     },
-  //   });
-
-  //   if (error) {
-  //     console.error(error);
-  //   }
-
-  //   if (data) {
-  //     store.setUserId(data);
-  //     navigateTo("/pantalla-inicio");
-  //   }
-  // } catch (error) {
-  //   console.error("Something went wrong on the signin: ", error);
-  //   alert("¡Something went wrong!");
-  // }
   try {
     const { success, error } = await store.signin(email.value, password.value);
 
     if (success) {
+      showError.value = false;
+      errorMessage.value = "";
       navigateTo("/pantalla-inicio");
     } else if (error) {
+      showError.value = true;
+      errorMessage.value = "Invalid email or password";
       console.error(error);
     }
-  } catch (error) {
-    console.error("Something went wrong on the signin: ", error);
-    alert("¡Something went wrong!");
+  } catch (err) {
+    console.error("Something went wrong on the signin: ", err);
+    showError.value = true;
+    errorMessage.value = "Something went wrong!";
   }
 };
 
@@ -82,15 +77,15 @@ const createAccount = () => {
 };
 </script>
 
+
 <style scoped>
 
-.login-title {
-  text-align: center;
-  font-size: 30px;
+.header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 20px;
-  font-family: "Georgia", serif;
 }
-
 
 .login-container {
   background-color: #f5f5f5;
@@ -102,6 +97,7 @@ const createAccount = () => {
   box-shadow: 0 0 35px rgba(255, 165, 0, 0.7);
   transition: box-shadow 0.3s ease, transform 0.3s ease;
   font-family: "Georgia", serif;
+  position: relative;
 }
 
 .login-container:hover {
@@ -109,12 +105,11 @@ const createAccount = () => {
   transform: scale(1.01);
 }
 
-
-.header-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.login-title {
+  text-align: center;
+  font-size: 30px;
   margin-bottom: 20px;
+  font-family: "Georgia", serif;
 }
 
 
@@ -187,4 +182,42 @@ a:hover {
 .btn-white:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
+
+.error-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: red;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  border-radius: 10px 10px 0 0;
+  transform: translateY(100%);
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.slide-up-enter {
+  transform: translateY(100%);
+  opacity: 0;
+}
+.slide-up-enter-to {
+  transform: translateY(0%);
+  opacity: 1;
+}
+
+.slide-up-leave {
+  transform: translateY(0%);
+  opacity: 1;
+}
+.slide-up-leave-to {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
 </style>
+

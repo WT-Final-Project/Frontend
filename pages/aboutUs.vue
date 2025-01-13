@@ -1,11 +1,15 @@
 <template>
   <div class="about-us">
     <section class="hero">
+      <div class="back-button-circle">
+        <BackButton to="/pantalla-inicio" />
+      </div>
+
       <div class="hero-content">
         <h1>Accelerating Your Success</h1>
-        <BackButton to="/pantalla-inicio" />
         <p>
-          At <strong>Efficient Manager</strong>, we empower businesses to streamline project management, delivering exceptional results in record time.
+          At <strong>Efficient Manager</strong>, we empower businesses to streamline project
+          management, delivering exceptional results in record time.
         </p>
         <button @click="learnMore">Learn More</button>
       </div>
@@ -14,7 +18,8 @@
     <section class="values">
       <h2>Our Vision</h2>
       <p>
-        We envision a world where every project achieves its goals efficiently, minimizing delays and maximizing impact.
+        We envision a world where every project achieves its goals efficiently,
+        minimizing delays and maximizing impact.
       </p>
       <div class="value-cards">
         <div class="card">
@@ -43,13 +48,12 @@
 
     <section class="cta">
       <h2>Ready to Optimize Your Projects?</h2>
-      <p>
-        Join the hundreds of businesses that trust us to transform their project outcomes.
-      </p>
+      <p>Join the hundreds of businesses that trust us to transform their project outcomes.</p>
       <button @click="contactUs">Contact Us</button>
     </section>
   </div>
 </template>
+
 
 <script setup>
 const learnMore = () => {
@@ -69,6 +73,7 @@ const contactUs = () => {
 }
 
 .hero {
+  position: relative;
   background: url('/public/fondo2.jpg') no-repeat center center/cover;
   height: 75vh;
   display: flex;
@@ -76,9 +81,34 @@ const contactUs = () => {
   align-items: center;
   color: #fff;
   text-align: center;
-  margin-bottom: 10px; /* Reducir la separación debajo de la sección */
+  margin-bottom: 10px;
 }
 
+.back-button-circle {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  cursor: pointer;
+  z-index: 999;
+}
+.back-button-circle:hover {
+  background-color: #f0f0f0;
+}
+
+.back-button-circle a,
+.back-button-circle button {
+  color: #333;
+  font-size: 1.4rem;
+  text-decoration: none;
+}
 
 
 .hero-content {
@@ -97,49 +127,43 @@ const contactUs = () => {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-
 .hero button:hover {
   background-color: #e55500;
 }
 
-
 .values {
-  padding: 30px 20px; /* Reducir el padding superior/inferior */
+  padding: 30px 20px;
   background-color: #f5f5f5;
   text-align: center;
-  margin-top: 0; /* Eliminar el margen superior si existe */
+  margin-top: 0;
 }
-
 .value-cards {
   display: flex;
   gap: 20px;
   justify-content: center;
   margin-top: 30px;
 }
-
 .card {
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   width: 300px;
   overflow: hidden;
   text-align: center;
 }
-
 .card img {
   width: 100%;
   height: 200px;
   object-fit: cover;
 }
-
 .card h3 {
   margin: 15px 0;
   font-size: 1.5em;
 }
-
 .card p {
   padding: 0 10px 20px;
 }
+
 
 .cta {
   background-color: #333;
@@ -147,7 +171,6 @@ const contactUs = () => {
   padding: 50px 20px;
   text-align: center;
 }
-
 .cta button {
   margin-top: 20px;
   padding: 10px 20px;
@@ -158,8 +181,8 @@ const contactUs = () => {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-
 .cta button:hover {
   background-color: #e55500;
 }
 </style>
+

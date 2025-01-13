@@ -54,11 +54,10 @@ const formData = ref({
   description: "",
 });
 
-// Function to create project
 const createProject = async () => {
 
   try{
-    const result = await useFetch('http://localhost:3001/project/', {
+    const result = await $fetch('http://localhost:3001/project/', {
     method: 'post',
     body: {
       username: userId,
