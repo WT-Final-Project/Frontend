@@ -3,12 +3,15 @@
     <CabeceraPr />
     <div class="container">
       <BackButton :to="'/pantalla-inicio'" />
-       <NuxtLink v-if=" userRoleResponse.userrole === 'leader'" to="/modificar-proyecto">
-      <img class="settings" src="/conf.png" alt="Settings" />
-    </NuxtLink>
+      <NuxtLink
+        v-if="userRoleResponse.userrole === 'leader'"
+        to="/modificar-proyecto"
+      >
+        <img class="settings" src="/conf.png" alt="Settings" />
+      </NuxtLink>
       <h1 class="title">{{ project.projectname }}</h1>
       <p class="desc">{{ project.description }}</p>
-      <div v-if="userRoleResponse.userrole === 'leader'">
+      <div>
         <NuxtLink to="/crear-tarea">
           <MainButton class="custom-button">ADD TASK</MainButton>
         </NuxtLink>
@@ -21,7 +24,10 @@
         <h2>Pending project tasks:</h2>
       </div>
 
-      <TaskList :tasks="tasksAll" v-if="userRoleResponse.userrole === 'leader'" />
+      <TaskList
+        :tasks="tasksAll"
+        v-if="userRoleResponse.userrole === 'leader'"
+      />
       <TaskList :tasks="tasks" v-else />
     </div>
   </div>
@@ -96,7 +102,6 @@ const userrole = ref(userRoleResponse);
   box-shadow: 0 0 10px rgba(255, 165, 0, 0.4);
   transform: scale(1.05);
 }
-
 
 .container {
   position: relative;
