@@ -102,7 +102,7 @@ const uploadFile = async (file, taskId) => {
 }
 
 .dropzone {
-  border: 2px dashed #4b5945;
+  border: 2px dashed #d17c01;
   padding: 30px;
   width: 80%;
   max-width: 500px;
@@ -114,18 +114,18 @@ const uploadFile = async (file, taskId) => {
 }
 
 .dropzone:hover {
-  background-color: #b2c9ad;
+  background-color: #f7a631;
 }
 
 .dropzone p {
   margin: 0;
   font-size: 18px;
-  color: #4b5945;
+  color: #d17c01;
 }
 
 .status {
   margin-top: 20px;
   font-size: 16px;
-  color: #4b5945;
+  color: #d17c01;
 }
 </style>

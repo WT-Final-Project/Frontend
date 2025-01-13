@@ -93,7 +93,7 @@ watch(() => props.taskId, fetchFiles);
 }
 
 .card {
-  border: 1px solid #4b5945;
+  border: 1px solid #d17c01;
   border-radius: 8px;
   padding: 15px;
   background-color: #f9f9f9;
@@ -103,14 +103,14 @@ watch(() => props.taskId, fetchFiles);
 }
 
 .card:hover {
-  background-color: #b2c9ad;
+  background-color: #f7a631;
   transform: scale(1.02);
 }
 
 .card p {
   margin: 0;
   font-size: 16px;
-  color: #4b5945;
+  color: #d17c01;
   word-wrap: break-word;
 }
 
@@ -119,7 +119,7 @@ watch(() => props.taskId, fetchFiles);
   top: 10px;
   right: 10px;
   font-size: 20px;
-  color: #4b5945;
+  color: #d17c01;
   cursor: pointer;
   transition: color 0.3s ease;
 }
