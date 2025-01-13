@@ -11,7 +11,7 @@
         </div>
         <div
           class="delete-box"
-          v-if="user.rank === 'lider' && participant.username != userId"
+          v-if="role.userrole === 'leader' && participant.username != userId"
         >
           <span class="close-icon" @click="eliminar(participant.username)"
             >X</span
@@ -29,28 +29,27 @@ const store = useCookieStore();
 const userId = store.userId;
 const proyId = store.proyId;
 
-const { data: user } = await $fetch("http://localhost:3001/user/" + userId);
+const { data: role } = await $fetch(
+  "http://localhost:3001/participate/rank/" + proyId + "/" + userId
+);
 
 const props = defineProps({
   participants: Array,
 });
 
 const eliminar = async (delUser) => {
-  console.log(delUser);
   try {
     const result = await $fetch(
-      "http://localhost:3001/participate/" + proyId + "/" + userId,
+      "http://localhost:3001/participate/" + proyId + "/" + delUser,
       {
         method: "delete",
       }
     );
 
-    console.log(result);
-
-    if (result.data._value != null) {
-      window.location.reload(true);
+    if (result?.error) {
+      console.error(result.error);
     } else {
-      alert("An error has occur!");
+      window.location.reload(true);
     }
   } catch (error) {
     console.error(error);
