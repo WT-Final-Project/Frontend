@@ -3,8 +3,9 @@
     <h2 class="title">My tasks:</h2>
     <ul>
       <li v-for="task in tasks" :key="task.id" class="task">
-        <div class="task-details" @click="() => goToTaskDetails(task.id)">
+        <div class="task-details" @click="() => goToTaskDetails(task.taskid)">
           <div class="container">
+            <p>{{ task.taskid }}</p>
             <strong class="form-group">{{ task.tasktitle }}</strong>
             <p class="form-group">Due date: {{ task.duedate }}</p>
           </div>
@@ -15,7 +16,7 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps } from "vue";
 import { useCookieStore } from "~/stores";
 
 const store = useCookieStore();
@@ -28,14 +29,12 @@ const props = defineProps({
 });
 
 const goToTaskDetails = (taskId) => {
-  store.setTareaId(taskId)
- navigateTo(`/completar-tarea`);
+  store.setTareaId(taskId);
+  navigateTo(`/completar-tarea`);
 };
 </script>
 
-  
 <style scoped>
-
 .title {
   font-size: 55px;
   margin-bottom: 30px;
@@ -96,5 +95,4 @@ const goToTaskDetails = (taskId) => {
   font-size: 0.875rem;
   color: #000;
 }
-  </style>
-  
+</style>

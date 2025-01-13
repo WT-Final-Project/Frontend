@@ -22,13 +22,13 @@
         </div>
       </div>
 
-      <div
+      <!-- <div
         class="form-group"
         v-if="user.rank === 'leader' && task.completed === 1"
       >
         <label class="negrita">Archives:</label>
         <p>{{ fichero.name }}</p>
-      </div>
+      </div> -->
 
       <div
         class="form-group"
@@ -59,25 +59,25 @@ const proyId = store.proyId;
 const userId = store.userId;
 let hasFile = false;
 
+console.log(tareaId);
+
 const fileData = ref({
   filename: "",
 });
 
-const file = ref({
-  fichero: "",
-});
+// const file = ref({
+//   fichero: "",
+// });
 
-const { data: task } = await useFetch(
-  "http://localhost:3001/task/" + tareaId
-);
+const { data: task } = await $fetch("http://localhost:3001/task/" + tareaId);
 
 const { data: user } = await useFetch(
   "http://localhost:3001/task/all/" + proyId + "/" + userId
 );
 
-const { data: fichero } = await useFetch(
-  "http://localhost:3001/task/" + tareaId
-); //hacer esto aqui podria dar algun problema los vacios
+// const { data: fichero } = await useFetch(
+//   "http://localhost:3001/task/" + tareaId
+// ); //hacer esto aqui podria dar algun problema los vacios
 
 /*watchEffect(async () => {
   if (user.value && user.value.rango === 'lider' && task.completada === 1) {
@@ -147,7 +147,6 @@ function handleFileUpload(event) {
   font-family: "Georgia", serif;
 }
 
-
 .container {
   background-color: #fff;
   padding: 40px;
@@ -184,7 +183,6 @@ function handleFileUpload(event) {
   transform: scale(1.01);
 }
 
-
 .form-group {
   font-size: 20px;
   margin-bottom: 15px;
@@ -208,12 +206,10 @@ function handleFileUpload(event) {
 .submit-button:hover {
   background-color: #f2f2f2;
   transform: scale(1.03);
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
-
 
 .negrita {
   font-weight: bold;
 }
-
 </style>

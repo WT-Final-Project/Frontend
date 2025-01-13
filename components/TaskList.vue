@@ -1,38 +1,38 @@
 <template>
-    <div class="task-list">
-        <ul>
-          <li v-for="task in tasks" :key="task.id" class="task">
-            <div class="container">
-              <div @click="() => goToTaskDetails(task.id)">
-                <strong>{{ task.tasktitle }}</strong>
-                <p>Assigned to: {{ task.username }}</p>
-                <p>Due date: {{ task.duedate }}</p>
-              </div>
-            </div>
-          </li>
-        </ul>
-    </div>
-  </template>
-  
-  <script setup>
-  import { useCookieStore } from "~/stores";
+  <div class="task-list">
+    <ul>
+      <li v-for="task in tasks" :key="task.id" class="task">
+        <div class="container">
+          <div @click="() => goToTaskDetails(task.taskid)">
+            <strong>{{ task.tasktitle }}</strong>
+            <p>Assigned to: {{ task.username }}</p>
+            <p>Due date: {{ task.duedate }}</p>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</template>
 
-  const store = useCookieStore();
-  
-  const props = defineProps({
-    tasks: {
-      type: Array,
-      required: true,
-    },
-  });
+<script setup>
+import { useCookieStore } from "~/stores";
 
-  const goToTaskDetails = (taskId) => {
-    store.setTareaId(taskId)
-    navigateTo(`/completar-tarea`);
-  };
-  </script>
-  
-  <style scoped>
+const store = useCookieStore();
+
+const props = defineProps({
+  tasks: {
+    type: Array,
+    required: true,
+  },
+});
+
+const goToTaskDetails = (taskId) => {
+  store.setTareaId(taskId);
+  navigateTo(`/completar-tarea`);
+};
+</script>
+
+<style scoped>
 .container {
   background-color: #fff;
   padding: 15px;
@@ -49,7 +49,4 @@
   box-shadow: 0 0 25px rgba(255, 165, 0, 0.6);
   transform: scale(1.01);
 }
-
-  
-  </style>
-  
+</style>

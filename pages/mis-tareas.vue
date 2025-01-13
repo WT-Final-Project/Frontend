@@ -1,31 +1,35 @@
 <template>
-    <div>
-      <CabeceraPr />
-      <div class="container">
-        <MyTaskList :tasks="tasks" />
-      </div>
+  <div>
+    <CabeceraPr />
+    <div class="container">
+      <MyTaskList :tasks="tasks" />
     </div>
-  </template>
-  
-  <script setup>
-  import { useCookieStore } from '~/stores';
+  </div>
+</template>
 
-  definePageMeta({
-    middleware: ["auth"],
-  });
+<script setup>
+import { useCookieStore } from "~/stores";
 
-  onMounted(() => {
+definePageMeta({
+  middleware: ["auth"],
+});
+
+onMounted(() => {
   store.setTareaId(undefined);
 });
-  
-  const store = useCookieStore();
-  const userId = store.userId
-  const proyId = store.proyId
-  
-  const { data: tasks } = await useFetch('http://localhost:3001/task/uncompleted/'+proyId+'/'+userId);
-  </script>
-  
-  <style scoped>
+
+const store = useCookieStore();
+const userId = store.userId;
+const proyId = store.proyId;
+
+const { data: tasks } = await $fetch(
+  "http://localhost:3001/task/uncompleted/" + proyId + "/" + userId
+);
+
+console.log(tasks);
+</script>
+
+<style scoped>
 .container {
   background-color: #fff;
   padding: 40px;
@@ -49,6 +53,4 @@
   color: #333;
   font-family: inherit;
 }
-
-  </style>
-  
+</style>
