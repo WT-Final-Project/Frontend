@@ -7,14 +7,7 @@
           <h2 class="title">CONFIGURE ACCOUNT</h2>
           <div class="form-row">
             <div class="input-group">
-                 <label for="username">User name:</label>
-                    <input
-                      type="text"
-                      id="username"
-                      v-model="accountData.username"
-                      placeholder="Usuario"
-                      required
-                    />
+              <label for="username">User name: {{ userId }}</label>
             </div>
             <div class="input-group">
               <label for="name">Name:</label>
@@ -39,9 +32,7 @@
               />
             </div>
           </div>
-          <button class="submit-button" type="submit">
-            Save Account Info
-          </button>
+          <button class="submit-button" type="submit">Save Account Info</button>
         </form>
       </div>
 
@@ -60,9 +51,7 @@
               />
             </div>
           </div>
-          <button class="submit-button" type="submit">
-            Change Email
-          </button>
+          <button class="submit-button" type="submit">Change Email</button>
         </form>
       </div>
 
@@ -110,9 +99,9 @@
     <div class="button-container">
       <button class="logout-button" @click="logout">Close session</button>
     </div>
-     <div class="bottom-bar-container">
+    <div class="bottom-bar-container">
       <BottonBar />
-     </div>
+    </div>
   </div>
 </template>
 
@@ -134,7 +123,6 @@ onMounted(() => {
 const userId = store.userId;
 
 const accountData = ref({
-  username: "",
   name: "",
   lastName: "",
 });
@@ -157,7 +145,6 @@ const submitAccountInfo = async () => {
     const response = await $fetch("http://localhost:3001/user/" + userId, {
       method: "put",
       body: {
-        username: accountData.value.username,
         name: accountData.value.name,
         lastName: accountData.value.lastName,
       },
@@ -175,7 +162,9 @@ const submitAccountInfo = async () => {
 
 const submitEmailChange = async () => {
   try {
-    const { error, success } = await store.changeEmail(emailData.value.newEmail);
+    const { error, success } = await store.changeEmail(
+      emailData.value.newEmail
+    );
     if (success) {
       alert("Check your email box to complete the change");
       store.logout();
@@ -218,7 +207,6 @@ const logout = () => {
   min-height: 1200px;
 }
 
-
 .container {
   background-color: #fff;
   padding: 30px;
@@ -234,7 +222,6 @@ const logout = () => {
   box-shadow: 0 0 35px rgba(255, 165, 0, 0.9);
   transform: scale(1.01);
 }
-
 
 .title {
   text-align: center;
@@ -286,13 +273,11 @@ input:focus {
   transform: scale(1.02);
 }
 
-
 .error {
   color: red;
   font-size: 0.8rem;
   margin-top: 5px;
 }
-
 
 .button-container {
   display: flex;
@@ -313,7 +298,6 @@ input:focus {
   background-color: #e05a5a;
   transform: scale(1.02);
 }
-
 
 .bottom-bar-container {
   position: absolute;

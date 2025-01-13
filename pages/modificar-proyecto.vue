@@ -53,21 +53,18 @@ const formData = ref({
 
 const modifyProject = async () => {
   try {
-    const result = await $fetch(
-      "http://localhost:3001/project/" + proyId,
-      {
-        method: "put",
-        body: {
-          name: formData.value.name,
-          description: formData.value.description,
-        },
-      }
-    );
+    const result = await $fetch("http://localhost:3001/project/" + proyId, {
+      method: "put",
+      body: {
+        name: formData.value.name,
+        description: formData.value.description,
+      },
+    });
 
     if (result?.error) {
       alert("¡An error has occurred!");
     } else {
-       navigateTo("/proyecto");
+      navigateTo("/pantalla-principal");
     }
   } catch (error) {
     console.error(error);
@@ -77,12 +74,9 @@ const modifyProject = async () => {
 
 const eliminar = async () => {
   try {
-    const result = await $fetch(
-      "http://localhost:3001/project/" + proyId,
-      {
-        method: "delete",
-      }
-    );
+    const result = await $fetch("http://localhost:3001/project/" + proyId, {
+      method: "delete",
+    });
 
     if (result?.error) {
       alert("¡Something went wrong!");
@@ -124,7 +118,6 @@ const eliminar = async () => {
   transform: scale(1.01);
 }
 
-
 .form-group {
   margin-bottom: 20px;
   color: #333;
@@ -136,7 +129,6 @@ const eliminar = async () => {
   margin-bottom: 5px;
   font-weight: bold;
 }
-
 
 .form-group input[type="text"] {
   width: calc(100% - 20px);
@@ -153,14 +145,12 @@ const eliminar = async () => {
   outline: none;
 }
 
-
 .buttons-wrapper {
   display: flex;
   justify-content: center;
   gap: 40px;
   margin-top: 30px;
 }
-
 
 .btn-black {
   padding: 12px 24px;
@@ -172,13 +162,11 @@ const eliminar = async () => {
   transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 
-
 .btn-black:hover {
   background-color: #333;
   transform: scale(1.05);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
-
 
 .btn-red {
   padding: 12px 24px;
@@ -189,7 +177,6 @@ const eliminar = async () => {
   border-radius: 30px;
   transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
-
 
 .btn-red:hover {
   background-color: #cc0000;
