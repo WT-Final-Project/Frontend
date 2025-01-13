@@ -25,8 +25,6 @@ const proyId = store.proyId;
 const { data: tasks } = await $fetch(
   "http://localhost:3001/task/uncompleted/" + proyId + "/" + userId
 );
-
-console.log(tasks);
 </script>
 
 <style scoped>

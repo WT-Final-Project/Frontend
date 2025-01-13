@@ -36,17 +36,14 @@
         <div class="form-group">
           <label for="nombreusuario">Assign to</label>
           <select id="nombreusuario" v-model="dataForm.username" required>
-                   <option
-              v-for="user in users?.data"
+            <option
+              v-for="user in users"
               :key="user.username"
               :value="user.username"
             >
               {{ user.username }}
             </option>
           </select>
-        </div>
-        <div>
-          <fileUpload />
         </div>
 
         <MainButton class="custom-button" type="submit">Create task</MainButton>
@@ -56,7 +53,6 @@
 </template>
 
 <script setup>
-import { useFetch } from "nuxt/app";
 import { useCookieStore } from "~/stores";
 import { ref } from "vue";
 
@@ -74,21 +70,16 @@ const dataForm = ref({
   duedate: "",
 });
 
-const { data: users } = await $fetch("http://localhost:3001/participate/all/" + proyId);
+const { data: users } = await $fetch(
+  "http://localhost:3001/participate/all/" + proyId
+);
 
 const submitTask = async () => {
-    console.log({
-    projectid: proyId,
-    username: dataForm.value.username,
-    tasktitle: dataForm.value.title,
-    description: dataForm.value.description,
-    duedate: dataForm.value.duedate,
-  });
   try {
     const result = await $fetch("http://localhost:3001/task/", {
       method: "post",
       body: {
-       projectId: proyId,
+        projectId: proyId,
         username: dataForm.value.username,
         title: dataForm.value.title,
         description: dataForm.value.description,
@@ -109,7 +100,6 @@ const submitTask = async () => {
 </script>
 
 <style scoped>
-
 .create-task {
   font-family: "Poppins", sans-serif;
   color: #333;
@@ -145,7 +135,7 @@ const submitTask = async () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2.2rem;  /* Ajusta a tu gusto */
+  font-size: 2.2rem; /* Ajusta a tu gusto */
   font-weight: 700;
   margin-top: 10px;
   margin-bottom: 30px;
@@ -163,7 +153,6 @@ const submitTask = async () => {
   margin-bottom: 8px;
 }
 
-
 input[type="text"],
 input[type="date"],
 select,
@@ -171,7 +160,7 @@ input[type="descripcion"] {
   width: 100%;
   border: none;
   border-radius: 25px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 12px 16px;
   font-size: 16px;
   font-family: "Poppins", sans-serif;

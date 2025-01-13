@@ -27,54 +27,50 @@
   </div>
 </template>
 
-  
-  <script setup>
-  import { ref } from 'vue';
-  import { useCookieStore } from "~/stores";
+<script setup>
+import { ref } from "vue";
+import { useCookieStore } from "~/stores";
 
-  definePageMeta({
-    middleware: ["auth"],
-  });
+definePageMeta({
+  middleware: ["auth"],
+});
 
-  onMounted(() => {
-  store.setProyId(undefined); 
+onMounted(() => {
+  store.setProyId(undefined);
   store.setTareaId(undefined);
 });
 
-  const store = useCookieStore();
+const store = useCookieStore();
 
-  const userId = store.userId;
-  
-  const dataForm = ref({
-    accessCode: ''
-  })
-  
-  const joinProject = async () => {
-    try {
-      
-      const result = await $fetch('http://localhost:3001/participate', {
-        method: 'post',
-        body: {
-          projectId: dataForm.value.accessCode,
-          username: userId
-        }
-      });
-      console.log(result);
-      if(result.data._value != null){
-        store.setProyId(dataForm.value.accessCode);
-        navigateTo('/proyecto');
-      } else {
-        alert("Error joining the project. The project either does not exist or you are already a member.");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("Error joining the project");
+const userId = store.userId;
+
+const dataForm = ref({
+  accessCode: "",
+});
+
+const joinProject = async () => {
+  try {
+    const result = await $fetch("http://localhost:3001/participate", {
+      method: "post",
+      body: {
+        projectId: dataForm.value.accessCode,
+        username: userId,
+      },
+    });
+
+    if (result?.error) {
+      console.error(result.error);
+    } else {
+      navigateTo("/proyecto");
     }
-  };
-  </script>
-  
-  <style scoped>
+  } catch (error) {
+    console.error(error);
+    alert("Error joining the project");
+  }
+};
+</script>
 
+<style scoped>
 .container {
   background-color: #fff;
   padding: 40px;
@@ -91,7 +87,6 @@
   box-shadow: 0 0 35px rgba(255, 165, 0, 0.9);
   transform: scale(1.01);
 }
-
 
 .title {
   text-align: center;
@@ -123,18 +118,15 @@
   font-family: inherit;
 }
 
-
 .access-input:focus {
   outline: none;
   border-color: #ff7f00;
   box-shadow: 0 0 8px rgba(255, 165, 0, 0.5);
 }
 
-
 .button-wrapper {
   text-align: center;
 }
-
 
 .join-button {
   border-radius: 30px;
