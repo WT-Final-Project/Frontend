@@ -28,7 +28,6 @@ const { data: projects } = await $fetch(
   "http://localhost:3001/participate/user-projects/" + username
 );
 
-console.log(projects);
 const selectProject = (projectId) => {
   store.setProyId(projectId.toString());
   navigateTo("/proyecto");
