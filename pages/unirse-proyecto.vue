@@ -61,7 +61,7 @@ const joinProject = async () => {
     if (result?.error) {
       console.error(result.error);
     } else {
-      navigateTo("/proyecto");
+      navigateTo("/pantalla-inicio");
     }
   } catch (error) {
     console.error(error);
