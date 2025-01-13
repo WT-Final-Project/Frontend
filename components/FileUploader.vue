@@ -18,6 +18,13 @@
 <script setup>
 import { ref } from "vue";
 
+// Define props
+const props = defineProps({
+  taskId: {
+    required: true,
+  },
+});
+
 const fileInput = ref(null);
 const statusMessage = ref("");
 
@@ -50,15 +57,16 @@ const handleFileInput = async (event) => {
 };
 
 const handleFileUpload = async (file) => {
-  const taskId = prompt("Enter the Task ID:");
-  if (!taskId) {
+  if (!props.taskId) {
     statusMessage.value = "Task ID is required!";
     return;
   }
 
   try {
-    await uploadFile(file, taskId);
+    await uploadFile(file, props.taskId);
     statusMessage.value = "File uploaded successfully!";
+
+    window.location.reload();
   } catch (err) {
     statusMessage.value = `Error uploading file: ${err.message}`;
   }

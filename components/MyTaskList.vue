@@ -5,7 +5,6 @@
       <li v-for="task in tasks" :key="task.id" class="task">
         <div class="task-details" @click="() => goToTaskDetails(task.taskid)">
           <div class="container">
-            <p>{{ task.taskid }}</p>
             <strong class="form-group">{{ task.tasktitle }}</strong>
             <p class="form-group">Due date: {{ task.duedate }}</p>
           </div>
